@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: #0E1116;
+    color: #E6E8EB;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-8 py-3 bg-[#4F7DF3] text-white font-medium rounded transition-all duration-300 hover:bg-[#3D6AE0] hover:shadow-lg hover:shadow-[#4F7DF3]/20 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-8 py-3 bg-[#161B22] border border-[#232A35] text-[#E6E8EB] font-medium rounded transition-all duration-300 hover:border-[#4F7DF3] hover:shadow-lg hover:shadow-[#4F7DF3]/10 active:scale-95;
+  }
+
+  .card-glow {
+    @apply bg-[#161B22] border border-[#232A35] rounded-lg transition-all duration-300 hover:border-[#4F7DF3] hover:shadow-lg hover:shadow-[#4F7DF3]/10;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-[#4F7DF3] to-[#2BD4A4] bg-clip-text text-transparent;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(79, 125, 243, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(79, 125, 243, 0.5);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.6s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-fadeInScale {
+  animation: fadeInScale 0.6s ease-out;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  @apply transition-colors duration-200;
+}
