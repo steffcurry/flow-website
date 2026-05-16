@@ -11,6 +11,7 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Pay from './pages/Pay';
 import Form from './pages/Form';
+import ROI from '.pages/ROICalculator';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/pay" element={<Pay />} />
           <Route path="/form" element={<Form />} />
+          <Route path="/roi" element={<ROI />} />
         </Routes>
       </Layout>
     </BrowserRouter>
