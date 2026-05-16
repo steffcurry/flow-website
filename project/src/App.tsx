@@ -29,7 +29,7 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/pay" element={<Pay />} />
           <Route path="/form" element={<Form />} />
-          <Route path="/roi" element={<ROI />} />
+          <Route path="/roi" element={<Roi />} />
         </Routes>
       </Layout>
     </BrowserRouter>
