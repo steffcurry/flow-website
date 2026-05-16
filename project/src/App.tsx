@@ -11,7 +11,7 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Pay from './pages/Pay';
 import Form from './pages/Form';
-import ROI from '.pages/ROICalculator';
+import Roi from '.pages/ROICalculator.tsx';
 
 function App() {
   return (
