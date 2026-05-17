@@ -10,7 +10,7 @@ export default function Footer() {
               Coreflow Automation
             </h3>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Custom AI automation systems for real businesses.
+              Custom AI automation systems for businesses.
             </p>
           </div>
 
