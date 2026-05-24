@@ -12,6 +12,7 @@ import Terms from './pages/Terms';
 import Pay from './pages/Pay';
 import Form from './pages/Form';
 import Roi from './pages/ROICalculator';
+import TemplatePage from './pages/TemplatePage';
 
 function App() {
   return (
@@ -30,9 +31,11 @@ function App() {
           <Route path="/pay" element={<Pay />} />
           <Route path="/form" element={<Form />} />
           <Route path="/roi" element={<Roi />} />
+          <Route path="/templates/:id" element={<TemplatePage />} />
         </Routes>
       </Layout>
     </BrowserRouter>
   );
 }
+
 export default App;
