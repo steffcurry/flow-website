@@ -11,8 +11,8 @@ const templates: Record<string, string> = {
   "1FeOL0SBWDyRDHxhO7fT4w-_JraUDkpEx": "Generate metaphor-based product video ads Veo 3",
   "1g24F2FMFBMmo3fu9RnUnVCUA10WqEYn6":  "Create cinematic quote videos with Veo 3",
   "1js-yzfB7ncbxxUae3d_IEq-CPdJhF8wx":  "Generate high quality video commercials with Veo 3",
-  "1VfRIMVxrdh1TwVQ3qMc5Vj1p9jhq8ogP":  "Generate LinkedIn leads using Google Sheets and Serper API",
-  "1XHhHa_gy8JtmK4HCdLuCTXU6ccbS6SiM": "Fetch daily YouTube videos from top AI automators and log them to Google Sheets",
+  "1Ny7UIHBNwY1TM8DM6SzdpTfnFJZIRrzs":  "Generate LinkedIn leads using Google Sheets and Serper API",
+  "1x3656QSmHOw1x8i3szFJCGwze25GXBiv": "Fetch daily YouTube videos from top AI automators and log them to Google Sheets",
 };
 
 const WEBHOOK_URL =
