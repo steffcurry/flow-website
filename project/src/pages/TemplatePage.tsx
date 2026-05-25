@@ -2,17 +2,17 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 const templates: Record<string, string> = {
-  "1":  "Generate Scroll-Stopping VSLs with Google Veo 3.0",
-  "2":  "Generate Addictive ASMR Veo 3 Reels",
-  "3":  "Generate 24s Engaging Conspiracy Doc Reels",
-  "4":  "FB Ad Spy: AI-Powered Competitor Ad Intelligence & Auto-Video Remixer",
-  "5":  "Generate AI B-roll Clips from Videos with Veo 3",
-  "6":  "Generate Mind-Bending 'What If' Videos with Google Veo 3",
-  "7":  "Generate Metaphor-Based Product Video Ads with Veo 3",
-  "8":  "Create Cinematic Quote Videos with Veo 3",
-  "9":  "Generate High Quality Video Commercials with Veo 3",
-  "10": "Generate LinkedIn Leads Using Google Sheets and Serper API",
-  "11": "Fetch Daily YouTube Videos from Top AI Automators and Log to Google Sheets",
+  "1LzRxKET8P2SBTXgr74cCJKI_dyz024sz": "Generate Scroll-Stopping VSLs in with Google Veo 3.0",
+  "18FoMbKpOgejcqKsJ5D6VfQlZTZ-mLN8Q": "Generate addictive ASMR Veo 3 reels",
+  "1GD1bh4-FLr0ISM8VBKZGR8K4GG4YumGk": "Generate 24s engaging conspiracy doc reels",
+  "134YU6X5MxIMj965w7llQYAillwNTt-wd":  "FB Ad Spy: AI-Powered Competitor Ad Intelligence & Auto-Video Remixer",
+  "14TPrE4JSyLr1R_rna3ymyo6g9WsFuQR3":  "Generate AI B-roll clips from videos with Veo 3",
+  "1OKm0yFA78aSQ08zS18MIA6VNoGrsgUNE":  "Generate Mind-Bending 'What If' Videos with Google Veo 3",
+  "1FeOL0SBWDyRDHxhO7fT4w-_JraUDkpEx": "Generate metaphor-based product video ads Veo 3",
+  "1g24F2FMFBMmo3fu9RnUnVCUA10WqEYn6":  "Create cinematic quote videos with Veo 3",
+  "1js-yzfB7ncbxxUae3d_IEq-CPdJhF8wx":  "Generate high quality video commercials with Veo 3",
+  "1VfRIMVxrdh1TwVQ3qMc5Vj1p9jhq8ogP":  "Generate LinkedIn leads using Google Sheets and Serper API",
+  "1XHhHa_gy8JtmK4HCdLuCTXU6ccbS6SiM": "Fetch daily YouTube videos from top AI automators and log them to Google Sheets",
 };
 
 const WEBHOOK_URL =
@@ -94,7 +94,6 @@ export default function TemplatePage() {
         <div style={styles.badge}>⚡ n8n Template</div>
 
         <h1 style={styles.title}>{templateName}</h1>
-        <p style={styles.templateId}>Template #{templateId}</p>
 
         <div style={styles.divider} />
 
@@ -117,8 +116,7 @@ export default function TemplatePage() {
 
         <p style={styles.hint}>
           <InfoIcon />
-          Required to generate your PayPal invoice and to receive the template
-          file after payment.
+          Required to generate your PayPal invoice and to receive the template file after payment.
         </p>
 
         <button
@@ -227,11 +225,6 @@ const styles: Record<string, React.CSSProperties> = {
     color: "#fff",
     lineHeight: 1.3,
     marginBottom: "0.5rem",
-  },
-  templateId: {
-    fontSize: 13,
-    color: "#4a6080",
-    marginBottom: "2rem",
   },
   divider: {
     border: "none",
