@@ -113,7 +113,7 @@ export default function Terms() {
             </div>
 
             <div>
-              <h2 className="text-2xl font-semibold mb-4 text-slate-100">
+              <h2 className="text-2xl font-normal mb-4 text-slate-100">
                 6. Intellectual Property & Ownership
               </h2>
 
@@ -141,112 +141,113 @@ export default function Terms() {
             </div>
 
             <div>
+              <h2 className="text-2xl font-normal mb-4 text-slate-100">
+                7. Setup, Deployment & Infrastructure Ownership
+              </h2>
+
+              <p className="mb-4 leading-relaxed">
+                Coreflow Automation may provide custom AI systems, workflow
+                automations, backend infrastructure, operational databases,
+                integrations, websites, dashboards, communication systems,
+                AI agents, internal tools, and related software
+                implementations as part of a one-time setup and deployment
+                service.
+              </p>
+
+              <p className="mb-4 leading-relaxed">
+                Initial setup, implementation, architecture, deployment,
+                configuration, onboarding, and production-readiness services
+                are billed separately from recurring monthly support
+                services and may require an upfront implementation fee as
+                defined within the applicable Statement of Work (SOW),
+                proposal, invoice, or service agreement.
+              </p>
+
+              <p className="mb-4 leading-relaxed">
+                Estimated delivery timelines, implementation scope, included
+                functionality, operational requirements, infrastructure
+                requirements, technical limitations, and project
+                deliverables shall be defined within the applicable SOW or
+                service agreement prior to project initiation.
+              </p>
+
+              <p className="mb-4 leading-relaxed">
+                Delivery timelines are estimates unless explicitly
+                guaranteed in writing and may be affected by client-side
+                delays, delayed approvals, unavailable credentials,
+                infrastructure limitations, third-party dependencies,
+                external provider restrictions, communication delays, or
+                operational requirements outside the control of Coreflow
+                Automation.
+              </p>
+
+              <p className="mb-4 leading-relaxed">
+                Production deployment may require cooperation, approvals,
+                credentials, account creation, infrastructure configuration,
+                domain access, communication platform setup, API
+                provisioning, hosting configuration, and timely
+                communication from the client.
+              </p>
+
+              <p className="mb-4 leading-relaxed">
+                Following production-ready delivery, Coreflow Automation may
+                provide reasonable onboarding guidance to assist the client
+                in configuring, connecting, operating, and maintaining
+                required third-party infrastructure, dependencies, hosting
+                environments, accounts, API providers, communication
+                services, databases, automation platforms, and related
+                operational resources.
+              </p>
+
+              <p className="mb-4 leading-relaxed">
+                Unless otherwise agreed in writing, all production
+                infrastructure, hosting environments, cloud resources,
+                platform subscriptions, domains, databases, API accounts,
+                communication services, automation platform accounts,
+                operational resources, external integrations, and
+                third-party provider accounts shall be owned, controlled,
+                financially maintained, and operationally managed by the
+                client.
+              </p>
+
+              <p className="mb-4 leading-relaxed">
+                The client is solely responsible for maintaining active
+                subscriptions, payment status, hosting services, API usage
+                limits, communication platform billing, infrastructure
+                availability, account security, backups, administrative
+                access, external-provider billing obligations, and
+                operational continuity of third-party services required for
+                system functionality.
+              </p>
+
+              <p className="mb-4 leading-relaxed">
+                Coreflow Automation does not provide ownership transfer of
+                third-party software, hosted services, APIs, cloud
+                providers, communication platforms, licensed technologies,
+                infrastructure providers, or external technologies not
+                directly developed by Coreflow Automation.
+              </p>
+
+              <p className="mb-4 leading-relaxed">
+                Coreflow Automation does not guarantee compatibility with
+                future third-party platform updates, API changes, pricing
+                adjustments, infrastructure modifications, external provider
+                limitations, software deprecations, service
+                discontinuations, policy updates, or platform restrictions
+                imposed by third-party providers.
+              </p>
+
+              <p className="leading-relaxed">
+                Recurring monthly support services, monitoring, maintenance,
+                troubleshooting, optimization, operational assistance,
+                infrastructure management, or ongoing support are separate
+                services and are not included within the initial setup fee
+                unless explicitly stated otherwise in writing.
+              </p>
+            </div>
+
+            <div>
               <h2 className="text-2xl font-semibold mb-4 text-slate-100">
-                <div>
-                  <h2 className="text-2xl font-semibold mb-4 text-slate-100">
-                    7. Setup, Deployment & Infrastructure Ownership
-                  </h2>
-
-                  <p className="mb-4 leading-relaxed">
-                    Coreflow Automation may provide custom AI systems, workflow
-                    automations, backend infrastructure, operational databases,
-                    integrations, websites, dashboards, communication systems,
-                    AI agents, internal tools, and related software
-                    implementations as part of a one-time setup and deployment
-                    service.
-                  </p>
-
-                  <p className="mb-4 leading-relaxed">
-                    Initial setup, implementation, architecture, deployment,
-                    configuration, onboarding, and production-readiness services
-                    are billed separately from recurring monthly support
-                    services and may require an upfront implementation fee as
-                    defined within the applicable Statement of Work (SOW),
-                    proposal, invoice, or service agreement.
-                  </p>
-
-                  <p className="mb-4 leading-relaxed">
-                    Estimated delivery timelines, implementation scope, included
-                    functionality, operational requirements, infrastructure
-                    requirements, technical limitations, and project
-                    deliverables shall be defined within the applicable SOW or
-                    service agreement prior to project initiation.
-                  </p>
-
-                  <p className="mb-4 leading-relaxed">
-                    Delivery timelines are estimates unless explicitly
-                    guaranteed in writing and may be affected by client-side
-                    delays, delayed approvals, unavailable credentials,
-                    infrastructure limitations, third-party dependencies,
-                    external provider restrictions, communication delays, or
-                    operational requirements outside the control of Coreflow
-                    Automation.
-                  </p>
-
-                  <p className="mb-4 leading-relaxed">
-                    Production deployment may require cooperation, approvals,
-                    credentials, account creation, infrastructure configuration,
-                    domain access, communication platform setup, API
-                    provisioning, hosting configuration, and timely
-                    communication from the client.
-                  </p>
-
-                  <p className="mb-4 leading-relaxed">
-                    Following production-ready delivery, Coreflow Automation may
-                    provide reasonable onboarding guidance to assist the client
-                    in configuring, connecting, operating, and maintaining
-                    required third-party infrastructure, dependencies, hosting
-                    environments, accounts, API providers, communication
-                    services, databases, automation platforms, and related
-                    operational resources.
-                  </p>
-
-                  <p className="mb-4 leading-relaxed">
-                    Unless otherwise agreed in writing, all production
-                    infrastructure, hosting environments, cloud resources,
-                    platform subscriptions, domains, databases, API accounts,
-                    communication services, automation platform accounts,
-                    operational resources, external integrations, and
-                    third-party provider accounts shall be owned, controlled,
-                    financially maintained, and operationally managed by the
-                    client.
-                  </p>
-
-                  <p className="mb-4 leading-relaxed">
-                    The client is solely responsible for maintaining active
-                    subscriptions, payment status, hosting services, API usage
-                    limits, communication platform billing, infrastructure
-                    availability, account security, backups, administrative
-                    access, external-provider billing obligations, and
-                    operational continuity of third-party services required for
-                    system functionality.
-                  </p>
-
-                  <p className="mb-4 leading-relaxed">
-                    Coreflow Automation does not provide ownership transfer of
-                    third-party software, hosted services, APIs, cloud
-                    providers, communication platforms, licensed technologies,
-                    infrastructure providers, or external technologies not
-                    directly developed by Coreflow Automation.
-                  </p>
-
-                  <p className="mb-4 leading-relaxed">
-                    Coreflow Automation does not guarantee compatibility with
-                    future third-party platform updates, API changes, pricing
-                    adjustments, infrastructure modifications, external provider
-                    limitations, software deprecations, service
-                    discontinuations, policy updates, or platform restrictions
-                    imposed by third-party providers.
-                  </p>
-
-                  <p className="leading-relaxed">
-                    Recurring monthly support services, monitoring, maintenance,
-                    troubleshooting, optimization, operational assistance,
-                    infrastructure management, or ongoing support are separate
-                    services and are not included within the initial setup fee
-                    unless explicitly stated otherwise in writing.
-                  </p>
-                </div>
                 8. Monthly Subscription Services
               </h2>
 
