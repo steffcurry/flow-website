@@ -347,7 +347,7 @@ export default function Terms() {
 
               <p className="leading-relaxed">
                 Either party may terminate an active monthly subscription
-                arrangement by providing at least thirty (30) days written
+                arrangement by providing at least thirty (30) days
                 notice prior to the next billing cycle. Upon termination, no
                 future recurring invoices will be issued unless otherwise agreed
                 in writing.
