@@ -13,6 +13,7 @@ import Pay from './pages/Pay';
 import Form from './pages/Form';
 import Roi from './pages/ROICalculator';
 import TemplatePage from './pages/TemplatePage';
+import Demo from './pages/Demo';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/form" element={<Form />} />
           <Route path="/roi" element={<Roi />} />
           <Route path="/templates/:id" element={<TemplatePage />} />
+          <Route path="/demo" element={<Demo />} />
         </Routes>
       </Layout>
     </BrowserRouter>
