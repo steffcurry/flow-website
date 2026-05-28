@@ -37,20 +37,37 @@ export default function Demo() {
   const [selectedId, setSelectedId] = useState(NICHES[0].id);
   const [status, setStatus] = useState<CallStatus>('idle');
   const [muted, setMuted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const vapiRef = useRef<Vapi | null>(null);
+  const hadErrorRef = useRef(false);
 
   const niche = NICHES.find((n) => n.id === selectedId)!;
 
   async function startCall() {
     setStatus('connecting');
+    hadErrorRef.current = false;
+    setErrorMsg('');
     const vapi = new Vapi(PUBLIC_KEY);
     vapiRef.current = vapi;
     vapi.on('call-start', () => setStatus('active'));
-    vapi.on('call-end', () => setStatus('ended'));
-    vapi.on('error', () => setStatus('error'));
+    vapi.on('call-end', () => {
+      if (!hadErrorRef.current) setStatus('ended');
+    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    vapi.on('error', (e: any) => {
+      hadErrorRef.current = true;
+      const msg = e?.message || e?.error?.message || JSON.stringify(e) || 'Unknown error';
+      console.error('[Vapi error]', e);
+      setErrorMsg(msg);
+      setStatus('error');
+    });
     try {
       await vapi.start(niche.assistantId);
-    } catch {
+    } catch (e: unknown) {
+      hadErrorRef.current = true;
+      const msg = e instanceof Error ? e.message : String(e);
+      console.error('[Vapi start exception]', e);
+      setErrorMsg(msg);
       setStatus('error');
     }
   }
@@ -68,8 +85,10 @@ export default function Demo() {
 
   function reset() {
     vapiRef.current = null;
+    hadErrorRef.current = false;
     setStatus('idle');
     setMuted(false);
+    setErrorMsg('');
   }
 
   const calling = status === 'connecting' || status === 'active';
@@ -190,6 +209,11 @@ export default function Demo() {
         {status === 'error' && (
           <div className="flex flex-col items-center gap-4 text-center">
             <p className="text-red-400 font-semibold">Αποτυχία σύνδεσης</p>
+            {errorMsg && (
+              <p className="text-slate-500 text-xs font-mono bg-slate-900 rounded-lg px-3 py-2 break-all">
+                {errorMsg}
+              </p>
+            )}
             <p className="text-slate-400 text-sm leading-relaxed">
               Βεβαιωθείτε ότι έχετε επιτρέψει πρόσβαση στο μικρόφωνο και δοκιμάστε ξανά.
             </p>
