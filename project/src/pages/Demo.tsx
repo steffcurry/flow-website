@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Vapi from '@vapi-ai/web';
 import { Phone, PhoneOff, Mic, MicOff, Building2, Scale, Stethoscope, Sparkles } from 'lucide-react';
 
@@ -38,8 +38,33 @@ export default function Demo() {
   const [status, setStatus] = useState<CallStatus>('idle');
   const [muted, setMuted] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [connectStep, setConnectStep] = useState(0);
   const vapiRef = useRef<Vapi | null>(null);
   const hadErrorRef = useRef(false);
+  const stepTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const CONNECT_STEPS = [
+    'Σύνδεση με τον διακομιστή...',
+    'Εκκίνηση AI βοηθού...',
+    'Σχεδόν έτοιμο...',
+  ];
+
+  useEffect(() => {
+    if (status === 'connecting') {
+      setConnectStep(0);
+      stepTimerRef.current = setInterval(() => {
+        setConnectStep((s) => Math.min(s + 1, CONNECT_STEPS.length - 1));
+      }, 2500);
+    } else {
+      if (stepTimerRef.current) {
+        clearInterval(stepTimerRef.current);
+        stepTimerRef.current = null;
+      }
+    }
+    return () => {
+      if (stepTimerRef.current) clearInterval(stepTimerRef.current);
+    };
+  }, [status]);
 
   const niche = NICHES.find((n) => n.id === selectedId)!;
 
@@ -146,9 +171,28 @@ export default function Demo() {
         )}
 
         {status === 'connecting' && (
-          <div className="flex flex-col items-center gap-4 py-6">
-            <div className="w-12 h-12 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-            <p className="text-slate-300 text-sm">Σύνδεση...</p>
+          <div className="flex flex-col items-center gap-6 py-4 w-full">
+            <div className="flex items-center gap-1.5">
+              {[0, 1, 2].map((i) => (
+                <span
+                  key={i}
+                  className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-bounce"
+                  style={{ animationDelay: `${i * 0.15}s` }}
+                />
+              ))}
+            </div>
+            <p className="text-slate-300 text-sm text-center min-h-[1.25rem] transition-all duration-500">
+              {CONNECT_STEPS[connectStep]}
+            </p>
+            <div className="w-full bg-slate-700 rounded-full h-1 overflow-hidden">
+              <div
+                className="h-full bg-blue-500 rounded-full transition-all duration-[2400ms] ease-out"
+                style={{ width: `${((connectStep + 1) / CONNECT_STEPS.length) * 85}%` }}
+              />
+            </div>
+            <p className="text-slate-600 text-xs text-center">
+              Η πρώτη σύνδεση μπορεί να πάρει 5–10 δευτερόλεπτα
+            </p>
           </div>
         )}
 
