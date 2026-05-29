@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Zap, Target, Shield } from 'lucide-react';
+import { ArrowRight, CheckCircle, Zap, Target, Shield, Phone, Building2, Scale, Stethoscope, Sparkles, Wrench, Wind, Home as HomeIcon, X } from 'lucide-react';
 
 export default function Home() {
   const solutions = [
@@ -148,6 +148,26 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Demo Banner */}
+      <section className="relative py-10 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center gap-6">
+            <div className="flex-1 text-center md:text-left">
+              <p className="text-xs font-semibold text-cyan-400 uppercase tracking-widest mb-2">Live Demo — No Phone Number Needed</p>
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Hear Our AI Receptionist In Action</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">Start a real voice conversation from your browser — in Greek — with our AI assistant for your industry.</p>
+            </div>
+            <Link
+              to="/demo"
+              className="flex-shrink-0 inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-cyan-500/40 transition-all duration-300 hover:scale-105"
+            >
+              <Phone size={18} />
+              Try the Live Demo
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="relative py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="bg-slate-900/30 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-8 sm:p-12 shadow-xl shadow-cyan-500/5">
@@ -243,6 +263,141 @@ export default function Home() {
                 <p className="text-slate-400 leading-relaxed">{solution.description}</p>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Industries We Serve */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/20">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-center text-slate-100">Industries We Serve</h2>
+          <p className="text-lg text-slate-400 mb-16 text-center max-w-2xl mx-auto">
+            Specialized AI automation systems for local service businesses in the Greek market.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { Icon: Stethoscope, label: 'Dental Clinics', desc: 'Appointment booking, patient follow-ups, FAQ handling' },
+              { Icon: Building2, label: 'Real Estate', desc: 'Lead qualification, property inquiries, viewing scheduling' },
+              { Icon: Sparkles, label: 'Med Spas', desc: 'Treatment bookings, consultation routing, retention flows' },
+              { Icon: Sparkles, label: 'Aesthetic Clinics', desc: 'Appointment management, pre-care instructions, reviews' },
+              { Icon: HomeIcon, label: 'Roofing', desc: 'Estimate requests, follow-ups, job status updates' },
+              { Icon: Wrench, label: 'Plumbing', desc: 'Emergency dispatch, appointment scheduling, qualification' },
+              { Icon: Wind, label: 'HVAC', desc: 'Service calls, maintenance reminders, lead capture' },
+              { Icon: Scale, label: 'Law Firms', desc: 'Intake qualification, consultation booking, document routing' },
+            ].map(({ Icon, label, desc }) => (
+              <div key={label} className="bg-slate-900/40 border border-slate-700/50 rounded-xl p-5 hover:border-cyan-500/40 hover:bg-slate-900/60 transition-all duration-300 group">
+                <Icon className="text-cyan-400 mb-3 group-hover:scale-110 transition-transform" size={24} />
+                <h3 className="font-semibold text-slate-100 text-sm mb-1">{label}</h3>
+                <p className="text-slate-500 text-xs leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Manual vs AI Comparison */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-center text-slate-100">Manual vs. AI Automated</h2>
+          <p className="text-lg text-slate-400 mb-16 text-center">What changes when you remove the manual layer.</p>
+          <div className="rounded-2xl overflow-hidden border border-slate-700">
+            <div className="grid grid-cols-2">
+              <div className="bg-red-500/5 border-r border-slate-700 p-4 text-center">
+                <span className="font-semibold text-red-400 text-sm uppercase tracking-wide">Manual Process</span>
+              </div>
+              <div className="bg-cyan-500/5 p-4 text-center">
+                <span className="font-semibold text-cyan-400 text-sm uppercase tracking-wide">AI Automated</span>
+              </div>
+            </div>
+            {[
+              ['Available 9–5, closed on weekends', 'Operates 24/7 with no downtime'],
+              ['Response time: minutes to hours', 'Response time: under 3 seconds'],
+              ['Cost scales with headcount', 'Cost stays flat as volume grows'],
+              ['Inconsistent quality per agent', 'Identical quality on every interaction'],
+              ['Errors increase under pressure', 'Performance unchanged at any volume'],
+              ['Hiring takes weeks, training takes months', 'Deploys in days, improves continuously'],
+              ['Staff time lost to repetitive tasks', 'Staff focused on high-judgment work only'],
+            ].map(([manual, automated], i) => (
+              <div key={i} className={`grid grid-cols-2 border-t border-slate-700/60 ${i % 2 === 0 ? 'bg-slate-900/20' : ''}`}>
+                <div className="p-4 border-r border-slate-700/60 flex items-start gap-2">
+                  <X size={14} className="text-red-400 flex-shrink-0 mt-0.5" />
+                  <p className="text-slate-400 text-sm">{manual}</p>
+                </div>
+                <div className="p-4 flex items-start gap-2">
+                  <CheckCircle size={14} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <p className="text-slate-300 text-sm">{automated}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Integration Wall */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/20">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-slate-100">Tools & Platforms We Connect</h2>
+          <p className="text-slate-400 mb-12">We build automation that works with your existing stack — no rip-and-replace.</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              'n8n', 'Make', 'Zapier', 'OpenAI', 'Anthropic', 'Vapi', 'ElevenLabs',
+              'Google Workspace', 'Google Sheets', 'Google Calendar',
+              'Slack', 'Telegram', 'WhatsApp Business',
+              'Twilio', 'HubSpot', 'Pipedrive', 'Airtable',
+              'Notion', 'Supabase', 'PostgreSQL', 'Qdrant',
+              'Stripe', 'Calendly', 'Typeform',
+            ].map((tool) => (
+              <span
+                key={tool}
+                className="px-4 py-2 bg-slate-800/60 border border-slate-600/40 rounded-full text-slate-300 text-sm hover:border-cyan-500/40 hover:text-cyan-300 transition-colors duration-200"
+              >
+                {tool}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What We Are Not */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-slate-900/40 border border-red-500/20 rounded-2xl p-8">
+              <h3 className="text-xl font-bold text-red-400 mb-6">What We Are Not</h3>
+              <ul className="space-y-3">
+                {[
+                  'A SaaS tool you subscribe to',
+                  'A generic chatbot vendor',
+                  'An AI "experiment" agency',
+                  'A freelancer adding ChatGPT to your site',
+                  'A short-term project with no ownership',
+                  'A solution looking for problems',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-slate-400 text-sm">
+                    <X size={14} className="text-red-400 flex-shrink-0 mt-0.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-slate-900/40 border border-cyan-500/20 rounded-2xl p-8">
+              <h3 className="text-xl font-bold text-cyan-400 mb-6">What We Do Differently</h3>
+              <ul className="space-y-3">
+                {[
+                  'We design systems, not standalone tools',
+                  'Every build starts with a workflow audit',
+                  'We own the logic, not just the configuration',
+                  'Automation is treated as permanent infrastructure',
+                  'We work exclusively with businesses ready to systematize',
+                  'Results are demonstrable before you commit',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-slate-300 text-sm">
+                    <CheckCircle size={14} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>

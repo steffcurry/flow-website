@@ -25,8 +25,8 @@ export default function Navigation() {
     { to: '/solutions', label: 'Solutions' },
     { to: '/how-it-works', label: 'How It Works' },
     { to: '/examples', label: 'Example Automations' },
-    { to: '/team', label: 'Team' },
-    { to: '/growth-framework', label: 'Growth Framework' },
+    { to: '/pricing', label: 'Pricing' },
+    { to: '/demo', label: '▶ Live Demo', highlight: true },
   ];
 
   return (
@@ -52,7 +52,9 @@ export default function Navigation() {
                 key={link.to}
                 to={link.to}
                 className={`text-sm font-medium transition-colors hover:text-cyan-400 ${
-                  location.pathname === link.to
+                  link.highlight
+                    ? 'text-cyan-400 font-semibold'
+                    : location.pathname === link.to
                     ? 'text-cyan-400'
                     : 'text-slate-300'
                 }`}
