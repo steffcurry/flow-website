@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import Vapi from '@vapi-ai/web';
-import { Phone, PhoneOff, Mic, MicOff, Building2, Scale, Stethoscope, Sparkles } from 'lucide-react';
+import { Phone, PhoneOff, Mic, MicOff, Building2, Scale, Stethoscope, Sparkles, Hammer, Wrench, Heart, Wind } from 'lucide-react';
 
 const PUBLIC_KEY = '6f1ee533-8616-4e86-8432-cf375ed66d47';
 
@@ -28,6 +28,30 @@ const NICHES = [
     label: 'Αισθητική Κλινική',
     assistantId: '54566363-e291-4a30-b425-fc5cb21a0b73',
     Icon: Sparkles,
+  },
+  {
+    id: 'roofing',
+    label: 'Στεγοποιός',
+    assistantId: '828c3e84-45fa-4e6a-81f4-5945ee7a2178',
+    Icon: Hammer,
+  },
+  {
+    id: 'plumbing',
+    label: 'Υδραυλικός',
+    assistantId: '723b997f-7032-4b69-b812-e988c3ff5119',
+    Icon: Wrench,
+  },
+  {
+    id: 'medspa',
+    label: 'Med Spa',
+    assistantId: 'beb14457-85ca-4027-9969-c53e5f8c71cc',
+    Icon: Heart,
+  },
+  {
+    id: 'hvac',
+    label: 'Κλιματισμός',
+    assistantId: '63feb293-d062-4df2-b555-a55e377829b8',
+    Icon: Wind,
   },
 ];
 
