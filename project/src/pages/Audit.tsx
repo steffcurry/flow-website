@@ -1,6 +1,10 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight, FileSearch, BarChart2, GitBranch, TrendingUp, CheckCircle, X } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { ArrowRight, FileSearch, BarChart2, GitBranch, TrendingUp, CheckCircle, X, Send } from 'lucide-react';
 import FadeIn from '../components/FadeIn';
+
+const NICHES = ['Οδοντιατρείο', 'Med Spa', 'Αισθητική Κλινική', 'Υδραυλικός', 'Κλιματισμός / HVAC', 'Μεσιτικό Γραφείο', 'Δικηγορικό Γραφείο', 'Άλλο'];
+
+const WEBHOOK = 'https://n8n.srv1363008.hstgr.cloud/webhook/audit-request';
 
 const deliverables = [
   {
@@ -50,6 +54,27 @@ const notFor = [
 ];
 
 export default function Audit() {
+  const formRef = useRef<HTMLDivElement>(null);
+  const [fields, setFields] = useState({ name: '', business_name: '', niche: '', phone: '', email: '' });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle');
+
+  const set = (k: string, v: string) => setFields(f => ({ ...f, [k]: v }));
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus('sending');
+    try {
+      await fetch(WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(fields),
+      });
+      setStatus('done');
+    } catch {
+      setStatus('error');
+    }
+  }
+
   return (
     <div className="relative">
       {/* Hero */}
@@ -67,12 +92,12 @@ export default function Audit() {
             <p className="text-slate-500 leading-relaxed mb-10 max-w-xl mx-auto">
               You receive four named documents that give you a complete picture of your automation opportunity. Whether you work with us afterwards or not.
             </p>
-            <Link
-              to="/contact"
+            <button
+              onClick={() => formRef.current?.scrollIntoView({ behavior: 'smooth' })}
               className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-cyan-500/40 transition-all hover:scale-105"
             >
-              Book Your Free Audit <ArrowRight size={18} />
-            </Link>
+              Ζητήστε το δωρεάν Audit <ArrowRight size={18} />
+            </button>
           </FadeIn>
         </div>
       </section>
@@ -153,15 +178,78 @@ export default function Audit() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Audit Request Form */}
       <FadeIn>
-        <section className="relative py-24 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-xl mx-auto text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-100 mb-4">Book your free audit</h2>
-            <p className="text-slate-400 mb-8">One contact form. We'll respond within one business day to schedule the discovery call.</p>
-            <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-cyan-500/40 transition-all hover:scale-105">
-              Book Your Free Audit <ArrowRight size={18} />
-            </Link>
+        <section ref={formRef} className="relative py-24 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-xl mx-auto">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-100 mb-3">Ζητήστε το δωρεάν Audit σας</h2>
+              <p className="text-slate-400 text-sm">Συμπληρώστε τα στοιχεία σας. Επικοινωνούμε εντός 1 εργάσιμης ημέρας.</p>
+            </div>
+
+            {status === 'done' ? (
+              <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-2xl p-10 text-center">
+                <CheckCircle size={40} className="text-cyan-400 mx-auto mb-4" />
+                <p className="text-white font-semibold text-lg mb-2">Λάβαμε το αίτημά σας!</p>
+                <p className="text-slate-400 text-sm">Θα επικοινωνήσουμε μαζί σας σύντομα για να ορίσουμε το session.</p>
+              </div>
+            ) : (
+              <form onSubmit={submit} className="bg-slate-900/40 border border-slate-700/50 rounded-2xl p-8 space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Όνομα *</label>
+                    <input required value={fields.name} onChange={e => set('name', e.target.value)}
+                      placeholder="Γιώργος Παπαδόπουλος"
+                      className="w-full bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 transition-colors" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Επωνυμία Επιχείρησης *</label>
+                    <input required value={fields.business_name} onChange={e => set('business_name', e.target.value)}
+                      placeholder="π.χ. Οδοντιατρείο Παπαδόπουλος"
+                      className="w-full bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 transition-colors" />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-slate-400 mb-1.5">Κλάδος *</label>
+                  <select required value={fields.niche} onChange={e => set('niche', e.target.value)}
+                    className="w-full bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:border-cyan-500/50 transition-colors appearance-none">
+                    <option value="" disabled>Επιλέξτε κλάδο...</option>
+                    {NICHES.map(n => <option key={n} value={n}>{n}</option>)}
+                  </select>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Τηλέφωνο *</label>
+                    <input required value={fields.phone} onChange={e => set('phone', e.target.value)}
+                      placeholder="+30 69x xxx xxxx" type="tel"
+                      className="w-full bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 transition-colors" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-slate-400 mb-1.5">Email <span className="text-slate-600">(προαιρετικό)</span></label>
+                    <input value={fields.email} onChange={e => set('email', e.target.value)}
+                      placeholder="email@example.com" type="email"
+                      className="w-full bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 transition-colors" />
+                  </div>
+                </div>
+
+                {status === 'error' && (
+                  <p className="text-red-400 text-xs text-center">Κάτι πήγε στραβά. Δοκιμάστε ξανά ή επικοινωνήστε μέσω email.</p>
+                )}
+
+                <button type="submit" disabled={status === 'sending'}
+                  className="w-full flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-cyan-500/40 transition-all hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100">
+                  {status === 'sending' ? (
+                    <span className="flex items-center gap-2"><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Αποστολή...</span>
+                  ) : (
+                    <><Send size={16} />Αποστολή Αιτήματος</>
+                  )}
+                </button>
+
+                <p className="text-slate-600 text-xs text-center">Τα στοιχεία σας παραμένουν απόρρητα και δεν κοινοποιούνται σε τρίτους.</p>
+              </form>
+            )}
           </div>
         </section>
       </FadeIn>
