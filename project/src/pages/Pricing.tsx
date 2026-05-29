@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { CheckCircle, ArrowRight, X } from 'lucide-react';
+import { CheckCircle, ArrowRight, X, TrendingUp, Clock } from 'lucide-react';
+import FadeIn from '../components/FadeIn';
 
 const tiers = [
   {
@@ -160,6 +161,68 @@ export default function Pricing() {
               </div>
             ))}
           </div>
+
+          {/* ROI & Payback Framework */}
+          <FadeIn>
+          <div className="max-w-4xl mx-auto mb-16 bg-gradient-to-br from-slate-900/60 to-slate-800/30 border border-cyan-500/20 rounded-2xl p-8 sm:p-10">
+            <div className="flex items-center gap-3 mb-6">
+              <TrendingUp className="text-cyan-400 flex-shrink-0" size={22} />
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-100">How we price — and why it works</h2>
+            </div>
+            <p className="text-slate-400 mb-8 leading-relaxed">
+              Our pricing is calibrated at approximately <strong className="text-white">20% of the annual value</strong> the system generates for your business. The remaining 80% stays with you.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              {[
+                {
+                  label: 'Dental clinic example',
+                  before: '4 missed bookings/week → 16/month lost',
+                  value: '€175 avg ticket × 16 = €2,800/mo recovered',
+                  cost: 'Your monthly investment: €297',
+                  ratio: '11% of monthly value',
+                  payback: 'Setup recovered in < 3 months',
+                },
+                {
+                  label: 'Plumbing company example',
+                  before: '2 missed emergency calls/week',
+                  value: '2 × €600 call-out × 4 = €4,800/mo recovered',
+                  cost: 'Your monthly investment: €297',
+                  ratio: '6% of monthly value',
+                  payback: 'Setup recovered in < 1 month',
+                },
+                {
+                  label: 'Law firm example',
+                  before: '4 missed consultations/month',
+                  value: '4 × €500 avg case = €2,000/mo recovered',
+                  cost: 'Your monthly investment: €297',
+                  ratio: '15% of monthly value',
+                  payback: 'Setup recovered in 3 months',
+                },
+              ].map(({ label, before, value, cost, ratio, payback }) => (
+                <div key={label} className="bg-slate-900/50 border border-slate-700/50 rounded-xl p-5">
+                  <p className="text-xs font-semibold text-cyan-400 uppercase tracking-wide mb-3">{label}</p>
+                  <p className="text-slate-500 text-xs mb-2 flex items-start gap-1"><X size={10} className="text-red-400 flex-shrink-0 mt-0.5"/>{before}</p>
+                  <p className="text-slate-300 text-sm font-medium mb-2">{value}</p>
+                  <p className="text-slate-500 text-xs mb-1">{cost}</p>
+                  <p className="text-cyan-400 text-xs font-semibold mb-2">{ratio}</p>
+                  <p className="text-slate-400 text-xs flex items-center gap-1"><Clock size={10}/>{payback}</p>
+                </div>
+              ))}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+              {[
+                { n: '~20%', label: 'of annual ROI is our pricing target' },
+                { n: '3 months', label: 'typical setup cost payback period' },
+                { n: '80%', label: 'of the value stays with your business' },
+              ].map(({ n, label }) => (
+                <div key={n} className="bg-slate-800/40 border border-slate-700/40 rounded-xl p-4">
+                  <p className="text-2xl font-bold text-white mb-1">{n}</p>
+                  <p className="text-slate-400 text-xs leading-relaxed">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          </FadeIn>
 
           {/* What's never included */}
           <div className="max-w-2xl mx-auto bg-slate-900/30 border border-slate-700/50 rounded-2xl p-8 mb-16">

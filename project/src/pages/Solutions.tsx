@@ -8,7 +8,9 @@ import {
   Globe,
   Cog,
   ArrowRight,
+  ChevronRight,
 } from 'lucide-react';
+import FadeIn from '../components/FadeIn';
 
 export default function Solutions() {
   const solutions = [
@@ -197,6 +199,42 @@ export default function Solutions() {
               These are modular AI automation systems built for specific business processes across sales, customer support, and internal operations. Each solution addresses defined workflows and integrates with your existing business systems.
             </p>
           </div>
+
+          {/* Architecture flowchart */}
+          <FadeIn>
+          <div className="mb-20 bg-slate-900/40 border border-slate-700/50 rounded-2xl p-8">
+            <p className="text-xs font-semibold text-cyan-400 uppercase tracking-widest text-center mb-2">How every system is structured</p>
+            <h3 className="text-lg font-semibold text-slate-100 text-center mb-8">The AI Automation Architecture</h3>
+            <div className="overflow-x-auto">
+              <div className="flex items-center gap-0 min-w-[700px] mx-auto max-w-4xl">
+                {[
+                  { label: 'Trigger', items: ['Inbound call', 'Web form', 'WhatsApp', 'Email', 'Webhook'], color: 'border-slate-600 bg-slate-800/60' },
+                  { label: 'AI Agent Layer', items: ['Intent detection', 'Qualification logic', 'FAQ from knowledge base', 'Escalation rules'], color: 'border-cyan-500/40 bg-cyan-500/5' },
+                  { label: 'Integrations', items: ['Calendar / CRM', 'Database update', 'Notification send', 'Document routing'], color: 'border-blue-500/40 bg-blue-500/5' },
+                  { label: 'Output', items: ['Booking confirmed', 'Lead scored', 'Team notified', 'Data logged'], color: 'border-green-500/30 bg-green-500/5' },
+                ].map(({ label, items, color }, i, arr) => (
+                  <div key={label} className="flex items-center flex-1">
+                    <div className={`flex-1 border ${color} rounded-xl p-4`}>
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3 text-center">{label}</p>
+                      <ul className="space-y-1.5">
+                        {items.map(item => (
+                          <li key={item} className="text-slate-300 text-xs flex items-center gap-1.5">
+                            <span className="w-1 h-1 rounded-full bg-cyan-400 flex-shrink-0" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    {i < arr.length - 1 && (
+                      <ChevronRight size={20} className="text-slate-600 flex-shrink-0 mx-1" />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <p className="text-slate-600 text-xs text-center mt-6">Every system built by Coreflow follows this architecture — with custom logic at each layer for your specific workflows.</p>
+          </div>
+          </FadeIn>
 
           <div className="space-y-12">
             {solutions.map((solution, index) => (
