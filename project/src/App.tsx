@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Solutions from './pages/Solutions';
+import SolutionDetail from './pages/SolutionDetail';
 import HowItWorks from './pages/HowItWorks';
 import Examples from './pages/Examples';
 import Team from './pages/Team';
@@ -16,6 +17,10 @@ import TemplatePage from './pages/TemplatePage';
 import Demo from './pages/Demo';
 import Pricing from './pages/Pricing';
 import Industry from './pages/Industry';
+import Receptionist from './pages/Receptionist';
+import Audit from './pages/Audit';
+import Integrations from './pages/Integrations';
+import Insights from './pages/Insights';
 
 function App() {
   return (
@@ -24,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/solutions" element={<Solutions />} />
+          <Route path="/solutions/:type" element={<SolutionDetail />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/examples" element={<Examples />} />
           <Route path="/team" element={<Team />} />
@@ -38,6 +44,10 @@ function App() {
           <Route path="/demo" element={<Demo />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/industries/:niche" element={<Industry />} />
+          <Route path="/receptionist" element={<Receptionist />} />
+          <Route path="/audit" element={<Audit />} />
+          <Route path="/integrations" element={<Integrations />} />
+          <Route path="/insights" element={<Insights />} />
         </Routes>
       </Layout>
     </BrowserRouter>

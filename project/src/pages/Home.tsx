@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle, Zap, Target, Shield, Phone, Building2, Scale, Stethoscope, Sparkles, Wrench, Wind, Home as HomeIcon, X } from 'lucide-react';
+import FadeIn from '../components/FadeIn';
 
 export default function Home() {
   const solutions = [
@@ -106,6 +107,7 @@ export default function Home() {
       <section className="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent pointer-events-none" />
         <div className="max-w-5xl mx-auto text-center relative z-10">
+          <FadeIn>
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-8 leading-tight">
             <span className="block text-slate-100 mb-3">
               AI Automation Is Becoming
@@ -145,10 +147,12 @@ export default function Home() {
               See Example Systems
             </Link>
           </div>
+          </FadeIn>
         </div>
       </section>
 
       {/* Demo Banner */}
+      <FadeIn>
       <section className="relative py-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center gap-6">
@@ -167,6 +171,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </FadeIn>
 
       {/* Stats Bar */}
       <section className="relative py-14 px-4 sm:px-6 lg:px-8 bg-slate-900/40 border-y border-slate-800/60">

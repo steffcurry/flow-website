@@ -24,11 +24,13 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 { to: '/', label: 'Home' },
+                { to: '/receptionist', label: 'AI Receptionist' },
                 { to: '/solutions', label: 'Solutions' },
-                { to: '/how-it-works', label: 'How It Works' },
+                { to: '/audit', label: 'Free Audit' },
                 { to: '/pricing', label: 'Pricing' },
-                { to: '/examples', label: 'Example Automations' },
-                { to: '/team', label: 'Team' },
+                { to: '/integrations', label: 'Integrations' },
+                { to: '/insights', label: 'Insights' },
+                { to: '/how-it-works', label: 'How It Works' },
                 { to: '/contact', label: 'Contact' },
               ].map(({ to, label }) => (
                 <li key={to}>
