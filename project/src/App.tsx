@@ -15,6 +15,7 @@ import Roi from './pages/ROICalculator';
 import TemplatePage from './pages/TemplatePage';
 import Demo from './pages/Demo';
 import Pricing from './pages/Pricing';
+import Industry from './pages/Industry';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/templates/:id" element={<TemplatePage />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/industries/:niche" element={<Industry />} />
         </Routes>
       </Layout>
     </BrowserRouter>

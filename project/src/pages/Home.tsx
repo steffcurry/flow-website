@@ -168,6 +168,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Stats Bar */}
+      <section className="relative py-14 px-4 sm:px-6 lg:px-8 bg-slate-900/40 border-y border-slate-800/60">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {[
+              { stat: '80%', label: 'of callers hang up without leaving a voicemail' },
+              { stat: '5 min', label: 'is all it takes for lead quality to drop 21×' },
+              { stat: '€28K+', label: 'average annual cost of a full-time receptionist in Greece' },
+              { stat: '12h', label: 'per week the average SME loses to automatable tasks' },
+            ].map(({ stat, label }) => (
+              <div key={stat}>
+                <p className="text-3xl sm:text-4xl font-bold text-cyan-400 mb-2">{stat}</p>
+                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="relative py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="bg-slate-900/30 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-8 sm:p-12 shadow-xl shadow-cyan-500/5">
@@ -333,23 +352,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Integration Wall */}
+      {/* Integration Marquee */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/20">
-        <div className="max-w-5xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center mb-10">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-slate-100">Tools & Platforms We Connect</h2>
-          <p className="text-slate-400 mb-12">We build automation that works with your existing stack — no rip-and-replace.</p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <p className="text-slate-400">We build automation that works with your existing stack — no rip-and-replace.</p>
+        </div>
+        <div className="overflow-hidden relative">
+          <div className="flex animate-marquee whitespace-nowrap">
             {[
               'n8n', 'Make', 'Zapier', 'OpenAI', 'Anthropic', 'Vapi', 'ElevenLabs',
-              'Google Workspace', 'Google Sheets', 'Google Calendar',
-              'Slack', 'Telegram', 'WhatsApp Business',
-              'Twilio', 'HubSpot', 'Pipedrive', 'Airtable',
-              'Notion', 'Supabase', 'PostgreSQL', 'Qdrant',
-              'Stripe', 'Calendly', 'Typeform',
-            ].map((tool) => (
+              'Google Workspace', 'Google Sheets', 'Google Calendar', 'Slack', 'Telegram',
+              'WhatsApp Business', 'Twilio', 'HubSpot', 'Pipedrive', 'Salesforce',
+              'Airtable', 'Notion', 'Supabase', 'PostgreSQL', 'Stripe', 'Calendly',
+              'Typeform', 'AWS', 'Shopify', 'WooCommerce', 'Qdrant',
+              'n8n', 'Make', 'Zapier', 'OpenAI', 'Anthropic', 'Vapi', 'ElevenLabs',
+              'Google Workspace', 'Google Sheets', 'Google Calendar', 'Slack', 'Telegram',
+              'WhatsApp Business', 'Twilio', 'HubSpot', 'Pipedrive', 'Salesforce',
+              'Airtable', 'Notion', 'Supabase', 'PostgreSQL', 'Stripe', 'Calendly',
+              'Typeform', 'AWS', 'Shopify', 'WooCommerce', 'Qdrant',
+            ].map((tool, i) => (
               <span
-                key={tool}
-                className="px-4 py-2 bg-slate-800/60 border border-slate-600/40 rounded-full text-slate-300 text-sm hover:border-cyan-500/40 hover:text-cyan-300 transition-colors duration-200"
+                key={i}
+                className="mx-3 px-4 py-2 bg-slate-800/60 border border-slate-600/40 rounded-full text-slate-300 text-sm inline-block"
               >
                 {tool}
               </span>
@@ -576,6 +601,37 @@ export default function Home() {
             Request an Automation Audit
             <ArrowRight className="ml-2" size={20} />
           </Link>
+        </div>
+      </section>
+
+      {/* Lead Magnet */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-xs font-semibold text-cyan-400 uppercase tracking-widest mb-3">Free Resource</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-100 mb-3">
+            The Coreflow Automation Blueprint 2026
+          </h2>
+          <p className="text-slate-400 mb-8 leading-relaxed">
+            5 workflows every local service business should automate — with architecture diagrams, tool recommendations, and ROI estimates. Free PDF.
+          </p>
+          <form
+            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+            onSubmit={(e) => { e.preventDefault(); window.location.href = '/contact'; }}
+          >
+            <input
+              type="email"
+              placeholder="your@email.com"
+              className="flex-1 px-4 py-3 bg-slate-800/60 border border-slate-600/50 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 text-sm"
+              required
+            />
+            <button
+              type="submit"
+              className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all text-sm whitespace-nowrap"
+            >
+              Send me the Blueprint
+            </button>
+          </form>
+          <p className="text-slate-600 text-xs mt-3">No spam. Unsubscribe any time.</p>
         </div>
       </section>
 

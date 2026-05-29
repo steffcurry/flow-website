@@ -161,6 +161,38 @@ export default function Pricing() {
             ))}
           </div>
 
+          {/* AI vs Human Cost Table */}
+          <div className="max-w-3xl mx-auto mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-center text-slate-100 mb-3">AI vs Human Receptionist</h2>
+            <p className="text-slate-400 text-center mb-10">The numbers that make this a no-brainer decision.</p>
+            <div className="rounded-2xl overflow-hidden border border-slate-700">
+              <div className="grid grid-cols-3 bg-slate-800/60">
+                <div className="p-4 text-slate-500 text-xs font-semibold uppercase tracking-wide border-r border-slate-700" />
+                <div className="p-4 text-center border-r border-slate-700">
+                  <span className="text-red-400 font-semibold text-sm">Human Receptionist</span>
+                </div>
+                <div className="p-4 text-center">
+                  <span className="text-cyan-400 font-semibold text-sm">AI System</span>
+                </div>
+              </div>
+              {[
+                ['Annual Cost', '€25,000 – €35,000', 'From €297/month'],
+                ['Availability', '9am–5pm, weekdays only', '24/7, 365 days'],
+                ['Simultaneous Calls', '1 at a time', 'Unlimited'],
+                ['Consistency', 'Varies by mood/fatigue', 'Identical every call'],
+                ['Training', 'Weeks, repeated on turnover', 'One-time setup'],
+                ['Scalability', 'Hire another person', 'Instant, no extra cost'],
+                ['Language', 'One language', 'Greek, English + more'],
+              ].map(([label, human, ai], i) => (
+                <div key={i} className={`grid grid-cols-3 border-t border-slate-700/60 ${i % 2 === 0 ? 'bg-slate-900/20' : ''}`}>
+                  <div className="p-4 border-r border-slate-700/60 text-slate-400 text-sm font-medium">{label}</div>
+                  <div className="p-4 border-r border-slate-700/60 text-slate-500 text-sm text-center">{human}</div>
+                  <div className="p-4 text-cyan-300 text-sm text-center font-medium">{ai}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* What's never included */}
           <div className="max-w-2xl mx-auto bg-slate-900/30 border border-slate-700/50 rounded-2xl p-8 mb-16">
             <h3 className="text-lg font-semibold text-slate-300 mb-4">What is never included in any engagement</h3>
@@ -176,9 +208,18 @@ export default function Pricing() {
 
           {/* Free audit CTA */}
           <div className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-2xl p-8 sm:p-12">
+            <div className="flex justify-center mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full text-green-400 text-sm font-medium">
+                <CheckCircle size={14} />
+                30-Day Satisfaction Guarantee on all engagements
+              </span>
+            </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Start with a Free Automation Audit</h2>
-            <p className="text-slate-400 mb-8 max-w-xl mx-auto">
+            <p className="text-slate-400 mb-4 max-w-xl mx-auto">
               We map your current workflows, identify the highest-value automation opportunities, and tell you exactly what a system would look like — before you commit to anything.
+            </p>
+            <p className="text-slate-500 text-sm mb-8 max-w-lg mx-auto">
+              You receive a <strong className="text-slate-400">Workflow X-Ray Report</strong>, a <strong className="text-slate-400">Bottleneck Analysis</strong>, an <strong className="text-slate-400">Automation Feasibility Matrix</strong>, and an <strong className="text-slate-400">ROI Projection</strong> — regardless of whether you proceed.
             </p>
             <Link
               to="/contact"
