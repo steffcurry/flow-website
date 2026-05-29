@@ -21,6 +21,9 @@ import Receptionist from './pages/Receptionist';
 import Audit from './pages/Audit';
 import Integrations from './pages/Integrations';
 import Insights from './pages/Insights';
+import MissedCallsCost from './pages/articles/MissedCallsCost';
+import FiveWorkflows from './pages/articles/FiveWorkflows';
+import AIReceptionistVsHiring from './pages/articles/AIReceptionistVsHiring';
 
 function App() {
   return (
@@ -48,6 +51,9 @@ function App() {
           <Route path="/audit" element={<Audit />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/insights" element={<Insights />} />
+          <Route path="/insights/missed-calls-cost-greek-sme" element={<MissedCallsCost />} />
+          <Route path="/insights/5-workflows-automate-local-business" element={<FiveWorkflows />} />
+          <Route path="/insights/ai-receptionist-vs-hiring-cost" element={<AIReceptionistVsHiring />} />
         </Routes>
       </Layout>
     </BrowserRouter>
