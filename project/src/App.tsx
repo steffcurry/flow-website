@@ -21,7 +21,6 @@ import Receptionist from './pages/Receptionist';
 import Audit from './pages/Audit';
 import Integrations from './pages/Integrations';
 import Insights from './pages/Insights';
-import CRM from './pages/CRM';
 
 function App() {
   return (
@@ -49,7 +48,6 @@ function App() {
           <Route path="/audit" element={<Audit />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/insights" element={<Insights />} />
-          <Route path="/crm" element={<CRM />} />
         </Routes>
       </Layout>
     </BrowserRouter>
