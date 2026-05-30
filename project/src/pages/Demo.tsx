@@ -10,48 +10,56 @@ const NICHES = [
     label: 'Μεσιτικό Γραφείο',
     assistantId: '2bfbe5b8-67f5-4a91-8d58-e53377dc810f',
     Icon: Building2,
+    benefit: 'Απαντά σε ενδιαφερόμενους αγοραστές ακόμα και εκτός ωραρίου — δεν χάνετε κανένα lead.',
   },
   {
     id: 'law-firm',
     label: 'Δικηγορικό Γραφείο',
     assistantId: 'bbd4429d-05b8-4611-953f-db0ff52d118b',
     Icon: Scale,
+    benefit: 'Προγραμματίζει συναντήσεις και απαντά επαγγελματικά 24/7 — χωρίς να διακόπτει εσάς.',
   },
   {
     id: 'dental',
     label: 'Οδοντιατρείο',
     assistantId: '4a7e9957-7092-4a89-88cd-a7f04319eeab',
     Icon: Stethoscope,
+    benefit: 'Κάθε αναπάντητη κλήση = χαμένο ραντεβού. Ο AI κλείνει ραντεβού 24/7 αντί για εσάς.',
   },
   {
     id: 'aesthetics',
     label: 'Αισθητική Κλινική',
     assistantId: '54566363-e291-4a30-b425-fc5cb21a0b73',
     Icon: Sparkles,
+    benefit: 'Κάθε αναπάντητη κλήση = χαμένη συνεδρία. Ο AI γεμίζει το πρόγραμμά σας αυτόματα.',
   },
   {
     id: 'roofing',
     label: 'Στεγοποιός',
     assistantId: '828c3e84-45fa-4e6a-81f4-5945ee7a2178',
     Icon: Hammer,
+    benefit: 'Επείγουσες κλήσεις δεν περιμένουν. Ο AI μαζεύει στοιχεία για προσφορά 24/7.',
   },
   {
     id: 'plumbing',
     label: 'Υδραυλικός',
     assistantId: '723b997f-7032-4b69-b812-e988c3ff5119',
     Icon: Wrench,
+    benefit: 'Βλάβες δεν γνωρίζουν ωράριο. Ο AI αξιολογεί το επείγον και συντονίζει τον τεχνικό.',
   },
   {
     id: 'medspa',
     label: 'Med Spa',
     assistantId: 'beb14457-85ca-4027-9969-c53e5f8c71cc',
     Icon: Heart,
+    benefit: 'Γεμίζει το ημερολόγιό σας 24/7 χωρίς επιπλέον προσωπικό — μόνο με AI.',
   },
   {
     id: 'hvac',
     label: 'Κλιματισμός',
     assistantId: '63feb293-d062-4df2-b555-a55e377829b8',
     Icon: Wind,
+    benefit: 'Κλείνει ραντεβού στις ώρες αιχμής αυτόματα — ακόμα και στις 2 τα ξημερώματα.',
   },
 ];
 
@@ -144,13 +152,34 @@ export default function Demo() {
 
   return (
     <section className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center px-4 py-20">
-      <div className="text-center mb-12 max-w-xl">
+      <div className="text-center mb-10 max-w-xl">
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
           Δοκιμάστε τον AI Βοηθό μας
         </h1>
-        <p className="text-slate-400 text-lg leading-relaxed">
+        <p className="text-slate-400 text-lg leading-relaxed mb-8">
           Επιλέξτε τον κλάδο σας και ξεκινήστε μια πραγματική συνομιλία — δωρεάν, απευθείας από τον browser σας.
         </p>
+        <div className="flex items-center justify-center gap-8 text-center">
+          <div>
+            <p className="text-2xl font-bold text-white">8</p>
+            <p className="text-slate-500 text-xs mt-0.5">κλάδοι</p>
+          </div>
+          <div className="w-px h-8 bg-slate-700" />
+          <div>
+            <p className="text-2xl font-bold text-white">24/7</p>
+            <p className="text-slate-500 text-xs mt-0.5">διαθεσιμότητα</p>
+          </div>
+          <div className="w-px h-8 bg-slate-700" />
+          <div>
+            <p className="text-2xl font-bold text-white">&lt;10s</p>
+            <p className="text-slate-500 text-xs mt-0.5">χρόνος εκκίνησης</p>
+          </div>
+          <div className="w-px h-8 bg-slate-700" />
+          <div>
+            <p className="text-2xl font-bold text-white">100%</p>
+            <p className="text-slate-500 text-xs mt-0.5">στα ελληνικά</p>
+          </div>
+        </div>
       </div>
 
       {/* Niche selector — hide during/after call */}
@@ -180,6 +209,9 @@ export default function Demo() {
             <p className="text-slate-400 text-sm text-center">
               Επιλεγμένος βοηθός:{' '}
               <span className="text-white font-semibold">{niche.label}</span>
+            </p>
+            <p className="text-slate-400 text-xs text-center leading-relaxed bg-slate-700/40 rounded-lg px-4 py-3">
+              {niche.benefit}
             </p>
             <button
               onClick={startCall}
@@ -255,21 +287,27 @@ export default function Demo() {
 
         {status === 'ended' && (
           <div className="flex flex-col items-center gap-4 text-center">
-            <p className="text-white font-semibold text-lg">Η κλήση ολοκληρώθηκε</p>
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 bg-blue-400 rounded-full" />
+              <span className="text-blue-400 font-medium text-sm">Η κλήση ολοκληρώθηκε</span>
+            </div>
+            <p className="text-white font-semibold text-lg leading-snug">
+              Αυτό μπορεί να απαντά για την επιχείρησή σας κάθε μέρα.
+            </p>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Θέλετε να μάθετε πώς μπορεί ο AI βοηθός να λειτουργεί για την επιχείρησή σας;
+              Μιλήστε μαζί μας και ρυθμίζουμε τον δικό σας AI βοηθό σε 48 ώρες.
             </p>
             <a
               href="/contact"
               className="w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-6 rounded-xl transition-colors"
             >
-              Επικοινωνήστε μαζί μας
+              Κλείστε ένα 15λεπτο call →
             </a>
             <button
               onClick={reset}
               className="text-slate-500 hover:text-slate-300 text-sm transition-colors"
             >
-              Νέα κλήση
+              Δοκιμάστε άλλον κλάδο
             </button>
           </div>
         )}
