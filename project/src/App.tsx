@@ -1,34 +1,37 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
-import Solutions from './pages/Solutions';
-import SolutionDetail from './pages/SolutionDetail';
-import HowItWorks from './pages/HowItWorks';
-import Examples from './pages/Examples';
-import Team from './pages/Team';
-import GrowthFramework from './pages/GrowthFramework';
-import Contact from './pages/Contact';
-import Privacy from './pages/Privacy';
-import Terms from './pages/Terms';
-import Pay from './pages/Pay';
-import Form from './pages/Form';
-import Roi from './pages/ROICalculator';
-import TemplatePage from './pages/TemplatePage';
-import Demo from './pages/Demo';
-import Pricing from './pages/Pricing';
-import Industry from './pages/Industry';
-import Receptionist from './pages/Receptionist';
-import Audit from './pages/Audit';
-import Integrations from './pages/Integrations';
-import Insights from './pages/Insights';
-import MissedCallsCost from './pages/articles/MissedCallsCost';
-import FiveWorkflows from './pages/articles/FiveWorkflows';
-import AIReceptionistVsHiring from './pages/articles/AIReceptionistVsHiring';
+
+const Solutions          = lazy(() => import('./pages/Solutions'));
+const SolutionDetail     = lazy(() => import('./pages/SolutionDetail'));
+const HowItWorks         = lazy(() => import('./pages/HowItWorks'));
+const Examples           = lazy(() => import('./pages/Examples'));
+const Team               = lazy(() => import('./pages/Team'));
+const GrowthFramework    = lazy(() => import('./pages/GrowthFramework'));
+const Contact            = lazy(() => import('./pages/Contact'));
+const Privacy            = lazy(() => import('./pages/Privacy'));
+const Terms              = lazy(() => import('./pages/Terms'));
+const Pay                = lazy(() => import('./pages/Pay'));
+const Form               = lazy(() => import('./pages/Form'));
+const Roi                = lazy(() => import('./pages/ROICalculator'));
+const TemplatePage       = lazy(() => import('./pages/TemplatePage'));
+const Demo               = lazy(() => import('./pages/Demo'));
+const Pricing            = lazy(() => import('./pages/Pricing'));
+const Industry           = lazy(() => import('./pages/Industry'));
+const Receptionist       = lazy(() => import('./pages/Receptionist'));
+const Audit              = lazy(() => import('./pages/Audit'));
+const Integrations       = lazy(() => import('./pages/Integrations'));
+const Insights           = lazy(() => import('./pages/Insights'));
+const MissedCallsCost    = lazy(() => import('./pages/articles/MissedCallsCost'));
+const FiveWorkflows      = lazy(() => import('./pages/articles/FiveWorkflows'));
+const AIReceptionistVsHiring = lazy(() => import('./pages/articles/AIReceptionistVsHiring'));
 
 function App() {
   return (
     <BrowserRouter>
       <Layout>
+        <Suspense fallback={<div className="min-h-screen bg-slate-950" />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/solutions" element={<Solutions />} />
@@ -55,6 +58,7 @@ function App() {
           <Route path="/insights/5-workflows-automate-local-business" element={<FiveWorkflows />} />
           <Route path="/insights/ai-receptionist-vs-hiring-cost" element={<AIReceptionistVsHiring />} />
         </Routes>
+        </Suspense>
       </Layout>
     </BrowserRouter>
   );
