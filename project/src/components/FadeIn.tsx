@@ -27,18 +27,13 @@ export default function FadeIn({ children, delay = 0, direction = 'up', classNam
     return () => observer.disconnect();
   }, []);
 
-  const initial =
-    direction === 'up' ? 'translateY(28px)' :
-    direction === 'left' ? 'translateX(-20px)' : 'none';
-
   return (
     <div
       ref={ref}
       className={className}
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? 'none' : initial,
-        transition: `opacity 0.75s cubic-bezier(0.4,0,0.2,1) ${delay}ms, transform 0.75s cubic-bezier(0.4,0,0.2,1) ${delay}ms`,
+        transition: `opacity 0.5s ease ${delay}ms`,
       }}
     >
       {children}
