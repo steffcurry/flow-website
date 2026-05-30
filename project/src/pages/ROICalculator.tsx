@@ -1,4 +1,5 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useLang } from "../contexts/LanguageContext";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -478,7 +479,12 @@ function FieldSelect({
 // ── Main Component ─────────────────────────────────────────────────────────────
 
 export default function ROICalculator() {
-  const [lang, setLang] = useState<Lang>("en");
+  const { lang: globalLang } = useLang();
+  const [lang, setLang] = useState<Lang>(globalLang as Lang);
+
+  // Sync with global lang toggle
+  useEffect(() => { setLang(globalLang as Lang); }, [globalLang]);
+
   const t = T[lang];
 
   // Work schedule

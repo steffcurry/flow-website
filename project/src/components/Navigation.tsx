@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useLang } from '../contexts/LanguageContext';
+import { pagesT } from '../i18n/pages';
 
 const SOLUTIONS = [
   { to: '/solutions/voice-receptionist', label: 'Voice Receptionist' },
@@ -74,6 +75,7 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { lang, toggle } = useLang();
+  const nt = pagesT[lang].nav;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -101,13 +103,13 @@ export default function Navigation() {
 
           {/* Desktop */}
           <div className="hidden lg:flex items-center gap-7">
-            <Dropdown label="Solutions" items={SOLUTIONS} isOpen={openDropdown === 'solutions'} onToggle={() => openMenu('solutions')} />
-            <Dropdown label="Industries" items={INDUSTRIES} isOpen={openDropdown === 'industries'} onToggle={() => openMenu('industries')} />
-            <Link to="/receptionist" className={`text-sm font-medium transition-colors hover:text-cyan-400 ${location.pathname === '/receptionist' ? 'text-cyan-400' : 'text-slate-300'}`}>Receptionist</Link>
-            <Link to="/how-it-works" className={`text-sm font-medium transition-colors hover:text-cyan-400 ${location.pathname === '/how-it-works' ? 'text-cyan-400' : 'text-slate-300'}`}>How It Works</Link>
-            <Link to="/pricing" className={`text-sm font-medium transition-colors hover:text-cyan-400 ${location.pathname === '/pricing' ? 'text-cyan-400' : 'text-slate-300'}`}>Pricing</Link>
+            <Dropdown label={nt.solutions} items={SOLUTIONS} isOpen={openDropdown === 'solutions'} onToggle={() => openMenu('solutions')} />
+            <Dropdown label={nt.industries} items={INDUSTRIES} isOpen={openDropdown === 'industries'} onToggle={() => openMenu('industries')} />
+            <Link to="/receptionist" className={`text-sm font-medium transition-colors hover:text-cyan-400 ${location.pathname === '/receptionist' ? 'text-cyan-400' : 'text-slate-300'}`}>{nt.receptionist}</Link>
+            <Link to="/how-it-works" className={`text-sm font-medium transition-colors hover:text-cyan-400 ${location.pathname === '/how-it-works' ? 'text-cyan-400' : 'text-slate-300'}`}>{nt.howItWorks}</Link>
+            <Link to="/pricing" className={`text-sm font-medium transition-colors hover:text-cyan-400 ${location.pathname === '/pricing' ? 'text-cyan-400' : 'text-slate-300'}`}>{nt.pricing}</Link>
             <Link to="/audit" className="text-sm font-medium text-slate-300 hover:text-cyan-400 border border-slate-600/60 hover:border-cyan-500/40 px-4 py-2 rounded-lg transition-colors">
-              {lang === 'en' ? 'Free Audit' : 'Δωρεάν Έλεγχος'}
+              {nt.freeAudit}
             </Link>
             <button
               onClick={toggle}
@@ -117,7 +119,7 @@ export default function Navigation() {
               {lang === 'en' ? 'ΕΛ' : 'EN'}
             </button>
             <Link to="/demo" className="px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold rounded-lg transition-opacity hover:opacity-90">
-              {lang === 'en' ? 'Live Demo' : 'Live Demo'}
+              {nt.liveDemo}
             </Link>
           </div>
 
@@ -133,33 +135,33 @@ export default function Navigation() {
           <div className="px-4 pt-2 pb-6 space-y-1">
             {/* Solutions */}
             <button onClick={() => setMobileSection(s => s === 'solutions' ? null : 'solutions')} className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium text-slate-300 hover:text-cyan-400 rounded-lg transition-colors">
-              Solutions <ChevronDown size={14} className={`transition-transform ${mobileSection === 'solutions' ? 'rotate-180' : ''}`} />
+              {nt.solutions} <ChevronDown size={14} className={`transition-transform ${mobileSection === 'solutions' ? 'rotate-180' : ''}`} />
             </button>
             {mobileSection === 'solutions' && SOLUTIONS.map(item => (
               <Link key={item.to} to={item.to} className="block px-8 py-2 text-sm text-slate-400 hover:text-cyan-400 transition-colors">{item.label}</Link>
             ))}
             {/* Industries */}
             <button onClick={() => setMobileSection(s => s === 'industries' ? null : 'industries')} className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium text-slate-300 hover:text-cyan-400 rounded-lg transition-colors">
-              Industries <ChevronDown size={14} className={`transition-transform ${mobileSection === 'industries' ? 'rotate-180' : ''}`} />
+              {nt.industries} <ChevronDown size={14} className={`transition-transform ${mobileSection === 'industries' ? 'rotate-180' : ''}`} />
             </button>
             {mobileSection === 'industries' && INDUSTRIES.map(item => (
               <Link key={item.to} to={item.to} className="block px-8 py-2 text-sm text-slate-400 hover:text-cyan-400 transition-colors">{item.label}</Link>
             ))}
             {[
-              { to: '/receptionist', label: 'Receptionist' },
-              { to: '/how-it-works', label: 'How It Works' },
-              { to: '/pricing', label: 'Pricing' },
+              { to: '/receptionist', label: nt.receptionist },
+              { to: '/how-it-works', label: nt.howItWorks },
+              { to: '/pricing', label: nt.pricing },
             ].map(link => (
               <Link key={link.to} to={link.to} className="block px-4 py-2.5 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-cyan-500/5 rounded-lg transition-colors">{link.label}</Link>
             ))}
             <Link to="/audit" className="block px-4 py-2.5 text-sm font-medium text-slate-300 border border-slate-600/60 rounded-lg text-center mt-2 hover:border-cyan-500/40">
-              {lang === 'en' ? 'Free Audit' : 'Δωρεάν Έλεγχος'}
+              {nt.freeAudit}
             </Link>
             <button onClick={toggle} className="w-full px-4 py-2.5 text-sm font-semibold text-slate-400 border border-slate-700/60 rounded-lg text-center transition-colors mt-1">
               {lang === 'en' ? '🇬🇷 Ελληνικά' : '🇬🇧 English'}
             </button>
             <Link to="/demo" className="block px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold rounded-lg text-center transition-opacity hover:opacity-90 mt-1">
-              Live Demo
+              {nt.liveDemo}
             </Link>
           </div>
         </div>
