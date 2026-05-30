@@ -1,8 +1,28 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Zap, Target, Shield, Phone, Building2, Scale, Stethoscope, Sparkles, Wrench, Wind, Home as HomeIcon, X } from 'lucide-react';
+import { ArrowRight, CheckCircle, Zap, Target, Shield, Phone, Building2, Scale, Stethoscope, Sparkles, Wrench, Wind, Home as HomeIcon, X, Heart } from 'lucide-react';
 import FadeIn from '../components/FadeIn';
 
+const WEBHOOK = 'https://n8n.srv1363008.hstgr.cloud/webhook/audit-request';
+
 export default function Home() {
+  const [email, setEmail] = useState('');
+  const [submitState, setSubmitState] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
+
+  async function handleLeadMagnet(e: React.FormEvent) {
+    e.preventDefault();
+    setSubmitState('loading');
+    try {
+      await fetch(WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name: 'Website Lead', business_name: 'Blueprint Request' }),
+      });
+      setSubmitState('done');
+    } catch {
+      setSubmitState('error');
+    }
+  }
   const solutions = [
     {
       title: 'AI Customer Support Systems',
@@ -302,7 +322,7 @@ export default function Home() {
             {[
               { Icon: Stethoscope, label: 'Dental Clinics', desc: 'Appointment booking, patient follow-ups, FAQ handling' },
               { Icon: Building2, label: 'Real Estate', desc: 'Lead qualification, property inquiries, viewing scheduling' },
-              { Icon: Sparkles, label: 'Med Spas', desc: 'Treatment bookings, consultation routing, retention flows' },
+              { Icon: Heart, label: 'Med Spas', desc: 'Treatment bookings, consultation routing, retention flows' },
               { Icon: Sparkles, label: 'Aesthetic Clinics', desc: 'Appointment management, pre-care instructions, reviews' },
               { Icon: HomeIcon, label: 'Roofing', desc: 'Estimate requests, follow-ups, job status updates' },
               { Icon: Wrench, label: 'Plumbing', desc: 'Emergency dispatch, appointment scheduling, qualification' },
@@ -609,34 +629,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Lead Magnet */}
+      {/* Lead Capture */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-xs font-semibold text-cyan-400 uppercase tracking-widest mb-3">Free Resource</p>
+          <p className="text-xs font-semibold text-cyan-400 uppercase tracking-widest mb-3">Free — No Commitment</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-100 mb-3">
-            The Coreflow Automation Blueprint 2026
+            Get a Free Automation Audit
           </h2>
           <p className="text-slate-400 mb-8 leading-relaxed">
-            5 workflows every local service business should automate — with architecture diagrams, tool recommendations, and ROI estimates. Free PDF.
+            Drop your email and we'll reach out within 24 hours to schedule a free 15-minute call — we map out exactly which workflows in your business can be automated and what it would save you.
           </p>
-          <form
-            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-            onSubmit={(e) => { e.preventDefault(); window.location.href = '/contact'; }}
-          >
-            <input
-              type="email"
-              placeholder="your@email.com"
-              className="flex-1 px-4 py-3 bg-slate-800/60 border border-slate-600/50 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 text-sm"
-              required
-            />
-            <button
-              type="submit"
-              className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all text-sm whitespace-nowrap"
+          {submitState === 'done' ? (
+            <div className="flex flex-col items-center gap-3">
+              <CheckCircle className="text-cyan-400" size={32} />
+              <p className="text-white font-semibold">We'll be in touch within 24 hours.</p>
+              <p className="text-slate-400 text-sm">Check your inbox — we'll send a confirmation shortly.</p>
+            </div>
+          ) : (
+            <form
+              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+              onSubmit={handleLeadMagnet}
             >
-              Send me the Blueprint
-            </button>
-          </form>
-          <p className="text-slate-600 text-xs mt-3">No spam. Unsubscribe any time.</p>
+              <input
+                type="email"
+                placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1 px-4 py-3 bg-slate-800/60 border border-slate-600/50 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 text-sm"
+                required
+              />
+              <button
+                type="submit"
+                disabled={submitState === 'loading'}
+                className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all text-sm whitespace-nowrap disabled:opacity-60"
+              >
+                {submitState === 'loading' ? 'Sending...' : 'Get Free Audit'}
+              </button>
+            </form>
+          )}
+          {submitState === 'error' && (
+            <p className="text-red-400 text-xs mt-3">Something went wrong — try emailing us directly.</p>
+          )}
+          {submitState !== 'done' && (
+            <p className="text-slate-600 text-xs mt-3">No spam. We'll only reach out once to schedule.</p>
+          )}
         </div>
       </section>
 
