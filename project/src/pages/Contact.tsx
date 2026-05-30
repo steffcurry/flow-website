@@ -7,12 +7,15 @@ export default function Contact() {
       <section className="relative py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
+            <p className="text-sm text-cyan-400 font-medium mb-4">
+              Κλείστε ένα δωρεάν 15λεπτο call — χωρίς δέσμευση
+            </p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-slate-100 drop-shadow-[0_0_30px_rgba(6,182,212,0.3)]">
               Request an Automation Audit
             </h1>
             <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
               Get a clear assessment of your automation opportunities and operational
-              bottlenecks.
+              bottlenecks — or just ask us directly how the AI system works for your business.
             </p>
             <div className="max-w-2xl mx-auto mt-8 bg-slate-900/30 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6">
               <p className="text-sm text-slate-400 leading-relaxed">
