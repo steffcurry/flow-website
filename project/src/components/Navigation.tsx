@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import { useLang } from '../contexts/LanguageContext';
 
 const SOLUTIONS = [
   { to: '/solutions/voice-receptionist', label: 'Voice Receptionist' },
@@ -72,6 +73,7 @@ export default function Navigation() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { lang, toggle } = useLang();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -84,7 +86,7 @@ export default function Navigation() {
     setOpenDropdown(null);
   }, [location]);
 
-  const toggle = (name: string) => setOpenDropdown(o => o === name ? null : name);
+  const openMenu = (name: string) => setOpenDropdown(o => o === name ? null : name);
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/85 backdrop-blur-xl border-b border-cyan-500/10 shadow-lg shadow-black/20' : 'bg-transparent'}`}>
@@ -96,13 +98,24 @@ export default function Navigation() {
 
           {/* Desktop */}
           <div className="hidden lg:flex items-center gap-7">
-            <Dropdown label="Solutions" items={SOLUTIONS} isOpen={openDropdown === 'solutions'} onToggle={() => toggle('solutions')} />
-            <Dropdown label="Industries" items={INDUSTRIES} isOpen={openDropdown === 'industries'} onToggle={() => toggle('industries')} />
+            <Dropdown label="Solutions" items={SOLUTIONS} isOpen={openDropdown === 'solutions'} onToggle={() => openMenu('solutions')} />
+            <Dropdown label="Industries" items={INDUSTRIES} isOpen={openDropdown === 'industries'} onToggle={() => openMenu('industries')} />
             <Link to="/receptionist" className={`text-sm font-medium transition-colors hover:text-cyan-400 ${location.pathname === '/receptionist' ? 'text-cyan-400' : 'text-slate-300'}`}>Receptionist</Link>
             <Link to="/how-it-works" className={`text-sm font-medium transition-colors hover:text-cyan-400 ${location.pathname === '/how-it-works' ? 'text-cyan-400' : 'text-slate-300'}`}>How It Works</Link>
             <Link to="/pricing" className={`text-sm font-medium transition-colors hover:text-cyan-400 ${location.pathname === '/pricing' ? 'text-cyan-400' : 'text-slate-300'}`}>Pricing</Link>
-            <Link to="/audit" className="text-sm font-medium text-slate-300 hover:text-cyan-400 border border-slate-600/60 hover:border-cyan-500/40 px-4 py-2 rounded-lg transition-all">Free Audit</Link>
-            <Link to="/demo" className="px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/40 transition-all hover:scale-105">▶ Live Demo</Link>
+            <Link to="/audit" className="text-sm font-medium text-slate-300 hover:text-cyan-400 border border-slate-600/60 hover:border-cyan-500/40 px-4 py-2 rounded-lg transition-colors">
+              {lang === 'en' ? 'Free Audit' : 'Δωρεάν Έλεγχος'}
+            </Link>
+            <button
+              onClick={toggle}
+              className="text-xs font-semibold text-slate-400 hover:text-cyan-400 border border-slate-700/60 hover:border-cyan-500/40 px-3 py-1.5 rounded-lg transition-colors tracking-wide"
+              title={lang === 'en' ? 'Switch to Greek' : 'Αλλαγή σε Αγγλικά'}
+            >
+              {lang === 'en' ? 'ΕΛ' : 'EN'}
+            </button>
+            <Link to="/demo" className="px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold rounded-lg transition-opacity hover:opacity-90">
+              {lang === 'en' ? 'Live Demo' : 'Live Demo'}
+            </Link>
           </div>
 
           <button className="lg:hidden text-slate-300 hover:text-cyan-400 transition-colors" onClick={() => setMobileOpen(o => !o)}>
@@ -136,8 +149,15 @@ export default function Navigation() {
             ].map(link => (
               <Link key={link.to} to={link.to} className="block px-4 py-2.5 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-cyan-500/5 rounded-lg transition-colors">{link.label}</Link>
             ))}
-            <Link to="/audit" className="block px-4 py-2.5 text-sm font-medium text-slate-300 border border-slate-600/60 rounded-lg text-center mt-2 hover:border-cyan-500/40">Free Audit</Link>
-            <Link to="/demo" className="block px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold rounded-lg text-center hover:shadow-lg transition-all mt-1">▶ Live Demo</Link>
+            <Link to="/audit" className="block px-4 py-2.5 text-sm font-medium text-slate-300 border border-slate-600/60 rounded-lg text-center mt-2 hover:border-cyan-500/40">
+              {lang === 'en' ? 'Free Audit' : 'Δωρεάν Έλεγχος'}
+            </Link>
+            <button onClick={toggle} className="w-full px-4 py-2.5 text-sm font-semibold text-slate-400 border border-slate-700/60 rounded-lg text-center transition-colors mt-1">
+              {lang === 'en' ? '🇬🇷 Ελληνικά' : '🇬🇧 English'}
+            </button>
+            <Link to="/demo" className="block px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold rounded-lg text-center transition-opacity hover:opacity-90 mt-1">
+              Live Demo
+            </Link>
           </div>
         </div>
       )}
