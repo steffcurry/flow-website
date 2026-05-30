@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle, ArrowRight, X, TrendingUp, Clock } from 'lucide-react';
 import FadeIn from '../components/FadeIn';
@@ -91,6 +92,10 @@ const notIncluded = [
 ];
 
 export default function Pricing() {
+  useEffect(() => {
+    document.title = 'Pricing — AI Automation Systems from €297/mo | Coreflow Automation';
+    return () => { document.title = 'Coreflow Automation | AI Automation Agency'; };
+  }, []);
   return (
     <div className="relative">
       <section className="relative py-24 px-4 sm:px-6 lg:px-8">

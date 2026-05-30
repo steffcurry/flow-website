@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import FadeIn from '../../components/FadeIn';
 
 export default function FiveWorkflows() {
+  useEffect(() => {
+    document.title = '5 Workflows Every Local Business Should Automate Before Hiring | Coreflow Automation';
+    return () => { document.title = 'Coreflow Automation | AI Automation Agency'; };
+  }, []);
   return (
     <article className="max-w-3xl mx-auto px-4 sm:px-6 py-20">
       <FadeIn>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Phone, CheckCircle, ArrowRight, Clock, Zap, Users, X, Building2, Scale, Stethoscope, Sparkles, Wrench, Wind, HomeIcon } from 'lucide-react';
+import { Phone, CheckCircle, ArrowRight, Clock, Zap, Users, X, Building2, Scale, Stethoscope, Sparkles, Wrench, Wind, HomeIcon, Heart } from 'lucide-react';
 import FadeIn from '../components/FadeIn';
 
 const features = [
@@ -29,7 +29,7 @@ const comparison = [
 const industries = [
   { to: '/industries/dental', label: 'Dental Clinics', Icon: Stethoscope },
   { to: '/industries/real-estate', label: 'Real Estate', Icon: Building2 },
-  { to: '/industries/med-spa', label: 'Med Spas', Icon: Sparkles },
+  { to: '/industries/med-spa', label: 'Med Spas', Icon: Heart },
   { to: '/industries/aesthetic-clinics', label: 'Aesthetic Clinics', Icon: Sparkles },
   { to: '/industries/roofing', label: 'Roofing', Icon: HomeIcon },
   { to: '/industries/plumbing', label: 'Plumbing', Icon: Wrench },

@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import FadeIn from '../../components/FadeIn';
 
 export default function MissedCallsCost() {
+  useEffect(() => {
+    document.title = 'Why 80% of Greek SME Calls Go to Voicemail | Coreflow Automation';
+    return () => { document.title = 'Coreflow Automation | AI Automation Agency'; };
+  }, []);
   return (
     <article className="max-w-3xl mx-auto px-4 sm:px-6 py-20">
       <FadeIn>

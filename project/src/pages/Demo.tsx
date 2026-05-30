@@ -98,6 +98,11 @@ export default function Demo() {
     };
   }, [status]);
 
+  useEffect(() => {
+    document.title = 'Live AI Receptionist Demo — Try It Free | Coreflow Automation';
+    return () => { document.title = 'Coreflow Automation | AI Automation Agency'; };
+  }, []);
+
   const niche = NICHES.find((n) => n.id === selectedId)!;
 
   async function startCall() {

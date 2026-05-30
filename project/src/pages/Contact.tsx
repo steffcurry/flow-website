@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
 import { Calendar, Mail } from 'lucide-react';
 
 export default function Contact() {
-
+  useEffect(() => {
+    document.title = 'Book a Free Automation Audit | Coreflow Automation';
+    return () => { document.title = 'Coreflow Automation | AI Automation Agency'; };
+  }, []);
   return (
     <div className="relative">
       <section className="relative py-24 px-4 sm:px-6 lg:px-8">
