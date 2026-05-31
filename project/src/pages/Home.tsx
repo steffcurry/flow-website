@@ -221,6 +221,19 @@ export default function Home() {
                   <p className="text-slate-500 text-xs leading-relaxed hidden sm:block">{desc}</p>
                 </div>
               ))}
+              <div className="col-span-2 sm:col-span-2 md:col-span-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                  <h3 className="font-semibold text-slate-100 text-sm mb-1">{t.industriesCtaTitle}</h3>
+                  <p className="text-slate-400 text-xs leading-relaxed">{t.industriesCtaSub}</p>
+                </div>
+                <Link
+                  to="/contact"
+                  className="shrink-0 inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold rounded-lg hover:opacity-90 transition-opacity duration-200 shadow-lg shadow-cyan-500/20"
+                >
+                  {t.industriesCtaBtn}
+                  <ArrowRight className="ml-2" size={16} />
+                </Link>
+              </div>
             </div>
           </div>
         </section>

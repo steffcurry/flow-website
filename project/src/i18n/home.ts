@@ -58,6 +58,9 @@ export const homeT = {
 
     industriesTitle: 'Industries We Serve',
     industriesSub: 'Specialized AI automation systems for local service businesses in the Greek market.',
+    industriesCtaTitle: "Don't see your industry?",
+    industriesCtaSub: 'We work with any service business that handles inbound customer contact. Get in touch.',
+    industriesCtaBtn: 'Get in Touch',
 
     comparisonTitle: 'Manual vs. AI Automated',
     comparisonSub: 'What changes when you remove the manual layer.',
@@ -211,6 +214,9 @@ export const homeT = {
 
     industriesTitle: 'Κλάδοι που Εξυπηρετούμε',
     industriesSub: 'Εξειδικευμένα συστήματα AI αυτοματοποίησης για τοπικές επιχειρήσεις υπηρεσιών στην ελληνική αγορά.',
+    industriesCtaTitle: 'Δεν βλέπετε τον κλάδο σας;',
+    industriesCtaSub: 'Δουλεύουμε με κάθε επιχείρηση που λαμβάνει κλήσεις από πελάτες. Επικοινωνήστε μαζί μας.',
+    industriesCtaBtn: 'Επικοινωνία',
 
     comparisonTitle: 'Χειροκίνητο vs. AI Αυτοματοποιημένο',
     comparisonSub: 'Τι αλλάζει όταν αφαιρείτε το χειροκίνητο στρώμα.',
