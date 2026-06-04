@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Coreflow — Walk-in Log</title>
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin:0; font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:#0b1220; color:#e8eefc; padding:16px 14px 40px;
+  }
+  .wrap { max-width:480px; margin:0 auto; }
+  h1 { font-size:20px; margin:6px 0 2px; }
+  h1 span { color:#4f8cff; }
+  .sub { color:#8aa0c8; font-size:13px; margin-bottom:18px; }
+  label { display:block; font-size:13px; color:#b9c9e8; margin:14px 0 6px; font-weight:600; }
+  input, select, textarea {
+    width:100%; background:#111c33; border:1px solid #243353; color:#e8eefc;
+    border-radius:12px; padding:14px; font-size:16px; outline:none;
+  }
+  input:focus, select:focus, textarea:focus { border-color:#4f8cff; }
+  textarea { min-height:64px; resize:vertical; }
+  .row { display:flex; gap:10px; }
+  .row > div { flex:1; }
+  button {
+    width:100%; margin-top:22px; background:#4f8cff; color:#04122e; border:none;
+    border-radius:14px; padding:17px; font-size:17px; font-weight:800;
+  }
+  button:active { background:#3d76e8; }
+  button:disabled { opacity:.5; }
+  .toast {
+    position:fixed; left:14px; right:14px; bottom:18px; max-width:480px; margin:0 auto;
+    padding:16px; border-radius:14px; font-weight:700; text-align:center;
+    transform:translateY(140%); transition:transform .25s; z-index:10;
+  }
+  .toast.show { transform:translateY(0); }
+  .toast.ok { background:#163b1f; color:#7ee49a; border:1px solid #1f6b35; }
+  .toast.err { background:#3b1616; color:#ff9a9a; border:1px solid #6b1f1f; }
+  .hint { font-size:12px; color:#6f84ab; margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Core<span>flow</span> · Walk-in Log</h1>
+  <div class="sub">Καταχώρησε κάθε επίσκεψη πριν φύγεις από την πόρτα.</div>
+
+  <form id="f">
+    <label>Επιχείρηση *</label>
+    <input name="business" required autocomplete="off" placeholder="π.χ. Οδοντιατρείο Παπαδόπουλος">
+
+    <div class="row">
+      <div>
+        <label>Ιδιοκτήτης</label>
+        <input name="owner" autocomplete="off" placeholder="όνομα">
+      </div>
+      <div>
+        <label>Τηλέφωνο</label>
+        <input name="phone" inputmode="tel" autocomplete="off" placeholder="2310...">
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Πόλη</label>
+        <input name="city" id="city" autocomplete="off" placeholder="πόλη">
+      </div>
+      <div>
+        <label>Niche</label>
+        <select name="niche" id="niche">
+          <option value="dental">Οδοντιατρείο</option>
+          <option value="physio">Φυσικοθεραπεία</option>
+          <option value="medspa">Med spa</option>
+          <option value="aesthetic">Αισθητική</option>
+          <option value="realestate">Μεσιτικό</option>
+          <option value="plumbing">Υδραυλικός</option>
+          <option value="hvac">Ψύξη/Θέρμανση</option>
+          <option value="lawfirm">Δικηγορικό</option>
+          <option value="roofing">Στέγες</option>
+          <option value="other">Άλλο</option>
+        </select>
+      </div>
+    </div>
+
+    <label>Αποτέλεσμα</label>
+    <select name="stage">
+      <option value="visited">Επισκέφθηκα</option>
+      <option value="interested">Ενδιαφέρθηκε</option>
+      <option value="demo_booked">Έκλεισα ραντεβού (audit call)</option>
+      <option value="not_now">Όχι τώρα (→ nurture)</option>
+      <option value="closed">Έκλεισε!</option>
+    </select>
+
+    <label>Σημείωση</label>
+    <textarea name="note" placeholder="τι είπε, ποιος πόνος, λεπτομέρειες"></textarea>
+
+    <label>Επόμενο βήμα</label>
+    <input name="next_step" autocomplete="off" placeholder="π.χ. Audit call Τετάρτη 17:00">
+
+    <button type="submit" id="btn">Καταχώρηση ✓</button>
+  </form>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const WEBHOOK = "https://n8n.srv1363008.hstgr.cloud/webhook/walkin-log";
+  const KEY = "cf-walkin-2026";
+  const f = document.getElementById('f');
+  const btn = document.getElementById('btn');
+  const toast = document.getElementById('toast');
+
+  // remember city + niche between entries
+  document.getElementById('city').value = localStorage.getItem('cf_city') || '';
+  if (localStorage.getItem('cf_niche')) document.getElementById('niche').value = localStorage.getItem('cf_niche');
+
+  function showToast(msg, ok) {
+    toast.textContent = msg;
+    toast.className = 'toast show ' + (ok ? 'ok' : 'err');
+    setTimeout(() => { toast.className = 'toast ' + (ok ? 'ok' : 'err'); }, 2600);
+  }
+
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true; btn.textContent = 'Αποστολή...';
+    const data = Object.fromEntries(new FormData(f).entries());
+    data.key = KEY;
+    localStorage.setItem('cf_city', data.city || '');
+    localStorage.setItem('cf_niche', data.niche || '');
+    try {
+      const r = await fetch(WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const j = await r.json();
+      if (j.ok) {
+        showToast('✓ ' + (j.business || 'Καταχωρήθηκε'), true);
+        // keep city + niche, clear the rest
+        ['business','owner','phone','note','next_step'].forEach(n => f.elements[n].value = '');
+        f.elements['stage'].value = 'visited';
+        f.elements['business'].focus();
+      } else {
+        showToast('Σφάλμα: ' + (j.error || 'unknown'), false);
+      }
+    } catch (err) {
+      showToast('Αποτυχία σύνδεσης — ξαναδοκίμασε', false);
+    } finally {
+      btn.disabled = false; btn.textContent = 'Καταχώρηση ✓';
+    }
+  });
+</script>
+</body>
+</html>
