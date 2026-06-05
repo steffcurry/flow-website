@@ -81,7 +81,7 @@ export const pagesT = {
       never: ['Generic off-the-shelf tools','Chatbots with no logic or context','One-off scripts with no support','AI experiments with no defined outcome'],
       auditTitle: 'Start with a Free Automation Audit',
       auditBody: 'We map your current workflows, identify the highest-value automation opportunities, and tell you exactly what a system would look like — before you commit to anything.',
-      auditNote: 'You receive a Workflow X-Ray Report, a Bottleneck Analysis, an Automation Feasibility Matrix, and an ROI Projection — regardless of whether you proceed.',
+      auditNote: 'You receive a Workflow Report, a Bottleneck Analysis, an Automation Feasibility Matrix, and an ROI Projection — regardless of whether you proceed.',
       auditBtn: 'Learn About the Free Audit',
     },
     audit: {
@@ -330,7 +330,7 @@ export const pagesT = {
       never: ['Γενικά έτοιμα εργαλεία','Chatbots χωρίς λογική ή πλαίσιο','Εφάπαξ scripts χωρίς υποστήριξη','AI πειράματα χωρίς καθορισμένο αποτέλεσμα'],
       auditTitle: 'Ξεκινήστε με Δωρεάν Έλεγχο Αυτοματοποίησης',
       auditBody: 'Χαρτογραφούμε τις τρέχουσες ροές εργασίας σας, εντοπίζουμε τις ευκαιρίες αυτοματοποίησης υψηλότερης αξίας και σας λέμε ακριβώς πώς θα έμοιαζε ένα σύστημα — πριν δεσμευτείτε σε οτιδήποτε.',
-      auditNote: 'Λαμβάνετε Αναφορά X-Ray Ροής, Ανάλυση Σημείων Συμφόρησης, Μήτρα Σκοπιμότητας Αυτοματοποίησης και Προβολή ROI — ανεξάρτητα από το αν προχωρήσετε.',
+      auditNote: 'Λαμβάνετε Αναφορά Ροής, Ανάλυση Σημείων Συμφόρησης, Μήτρα Σκοπιμότητας Αυτοματοποίησης και Προβολή ROI — ανεξάρτητα από το αν προχωρήσετε.',
       auditBtn: 'Μάθετε για τον Δωρεάν Έλεγχο',
     },
     audit: {
