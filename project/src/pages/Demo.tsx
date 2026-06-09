@@ -6,7 +6,7 @@ import {
   User, Mail, PhoneCall, Briefcase, ArrowRight, Loader2, CheckCircle2,
 } from 'lucide-react';
 
-const PUBLIC_KEY = '6f1ee533-8616-4e86-8432-cf375ed66d47';
+const PUBLIC_KEY = import.meta.env.VITE_VAPI_PUBLIC_KEY;
 const WEBHOOK_URL = 'https://n8n.srv1363008.hstgr.cloud/webhook/0b284ad8-ecf7-43d2-b01a-2ee6634f0712';
 
 const NICHES = [
