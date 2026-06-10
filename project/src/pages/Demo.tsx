@@ -116,7 +116,7 @@ export default function Demo() {
   const niche = NICHES.find((n) => n.id === selectedId)!;
   const inCall = status === 'connecting' || status === 'active';
 
-  // ── form validation & webhook ───────────────────────────────────────────────
+  // ── form validation ─────────────────────────────────────────────────────────
   function validateForm(): boolean {
     if (!lead.businessName.trim()) { setFormError('Παρακαλώ συμπληρώστε την επωνυμία επιχείρησης.'); return false; }
     if (!lead.fullName.trim())     { setFormError('Παρακαλώ συμπληρώστε το ονοματεπώνυμό σας.'); return false; }
@@ -126,8 +126,8 @@ export default function Demo() {
     return true;
   }
 
-  async function handleFormSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  // ── FIX: no FormEvent — button is type="button", no <form> wrapper ──────────
+  async function handleFormSubmit() {
     if (!validateForm()) return;
 
     setStatus('submitting');
@@ -142,7 +142,6 @@ export default function Demo() {
           nicheId: niche.id,
           timestamp: new Date().toISOString(),
         }),
-        // fire-and-forget is fine; we don't block call on webhook success
       });
       setWebhookOk(true);
     } catch {
@@ -223,7 +222,7 @@ export default function Demo() {
       </div>
 
       {/* niche grid — hide while form / calling / ended / error */}
-      {(status === 'idle') && (
+      {status === 'idle' && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10 w-full max-w-2xl">
           {NICHES.map(({ id, label, Icon }) => (
             <button
@@ -268,9 +267,12 @@ export default function Demo() {
           </>
         )}
 
-        {/* STEP 2 — lead-capture form */}
+        {/* STEP 2 — lead-capture form
+            FIX: replaced <form onSubmit> with <div> to prevent native form
+            submission from firing when the component unmounts mid-async-handler,
+            which caused a blank page in some browsers. */}
         {status === 'form' && (
-          <form onSubmit={handleFormSubmit} className="w-full flex flex-col gap-4">
+          <div className="w-full flex flex-col gap-4">
             <div className="text-center mb-1">
               <p className="text-white font-semibold text-base">Πριν ξεκινήσουμε…</p>
               <p className="text-slate-400 text-xs mt-1 leading-relaxed">
@@ -319,8 +321,10 @@ export default function Demo() {
               </p>
             )}
 
+            {/* FIX: type="button" + onClick — no native submit event */}
             <button
-              type="submit"
+              type="button"
+              onClick={handleFormSubmit}
               className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-semibold py-4 px-6 rounded-xl transition-colors mt-1"
             >
               <span>Συνέχεια στην κλήση</span>
@@ -338,7 +342,7 @@ export default function Demo() {
             <p className="text-slate-600 text-xs text-center -mt-1">
               Τα στοιχεία σας παραμένουν ασφαλή και δεν μοιράζονται με τρίτους.
             </p>
-          </form>
+          </div>
         )}
 
         {/* STEP 2.5 — submitting (sending webhook + spinning up) */}
@@ -399,6 +403,7 @@ export default function Demo() {
 
             <div className="flex gap-3 w-full">
               <button
+                type="button"
                 onClick={toggleMute}
                 className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border transition-colors ${
                   muted
@@ -410,6 +415,7 @@ export default function Demo() {
                 <span className="text-sm">{muted ? 'Unmute' : 'Mute'}</span>
               </button>
               <button
+                type="button"
                 onClick={stopCall}
                 className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white transition-colors"
               >
@@ -437,6 +443,7 @@ export default function Demo() {
               Κλείστε ένα 15λεπτο call →
             </a>
             <button
+              type="button"
               onClick={reset}
               className="text-slate-500 hover:text-slate-300 text-sm transition-colors"
             >
@@ -458,6 +465,7 @@ export default function Demo() {
               Βεβαιωθείτε ότι έχετε επιτρέψει πρόσβαση στο μικρόφωνο και δοκιμάστε ξανά.
             </p>
             <button
+              type="button"
               onClick={reset}
               className="bg-slate-700 hover:bg-slate-600 text-white py-2 px-6 rounded-xl text-sm transition-colors"
             >
