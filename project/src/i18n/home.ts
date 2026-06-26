@@ -215,7 +215,7 @@ export const homeT = {
     industriesTitle: 'Κλάδοι που Εξυπηρετούμε',
     industriesSub: 'Εξειδικευμένα συστήματα AI Automation για τοπικές επιχειρήσεις υπηρεσιών στην ελληνική αγορά.',
     industriesCtaTitle: 'Δεν βλέπεις τον κλάδο σου εδώ;',
-    industriesCtaSub: 'Επικοινώνησε μαζί μας.',
+    industriesCtaSub: 'Επικοινώνησε μαζί μας για εξειδικευμένη λύση.',
     industriesCtaBtn: 'Επικοινωνία',
 
     comparisonTitle: 'Χειροκίνητη Διαδικασία vs. AI Αυτοματοποίηση',
