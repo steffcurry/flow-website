@@ -215,14 +215,14 @@ export default function Demo() {
         <p className="text-slate-400 text-lg leading-relaxed mb-8">
           Επιλέξτε τον κλάδο σας και ξεκινήστε μια πραγματική συνομιλία — δωρεάν, απευθείας από τον browser σας.
         </p>
-        <div className="flex items-center justify-center gap-8 text-center">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-5 text-center sm:flex sm:items-center sm:justify-center sm:gap-8">
           {[['8', 'κλάδοι'], ['24/7', 'διαθεσιμότητα'], ['<10s', 'χρόνος εκκίνησης'], ['100%', 'στα ελληνικά']].map(([val, lbl], i, arr) => (
-            <div key={lbl} className="flex items-center gap-8">
+            <div key={lbl} className="flex items-center justify-center sm:gap-8">
               <div>
                 <p className="text-2xl font-bold text-white">{val}</p>
                 <p className="text-slate-500 text-xs mt-0.5">{lbl}</p>
               </div>
-              {i < arr.length - 1 && <div className="w-px h-8 bg-slate-700" />}
+              {i < arr.length - 1 && <div className="hidden sm:block w-px h-8 bg-slate-700" />}
             </div>
           ))}
         </div>
