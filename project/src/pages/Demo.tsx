@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import Vapi from '@vapi-ai/web';
+import { useLang } from '../contexts/LanguageContext';
 import {
   Phone, PhoneOff, Mic, MicOff, Building2, Scale, Stethoscope,
   Sparkles, Hammer, Wrench, Heart, Wind,
@@ -8,6 +9,14 @@ import {
 
 const PUBLIC_KEY = import.meta.env.VITE_VAPI_PUBLIC_KEY;
 const WEBHOOK_URL = 'https://n8n.srv1363008.hstgr.cloud/webhook/0b284ad8-ecf7-43d2-b01a-2ee6634f0712';
+
+const INSTAGRAM_DM = 'https://ig.me/m/coreflow.automation';
+
+// Shown when a call can't start. The real error goes to the browser console only.
+const OFFLINE = {
+  en: { before: 'The live demo is offline right now. Message us on ', link: 'Instagram', after: " and we'll show you how it works." },
+  gr: { before: 'Το live demo δεν λειτουργεί αυτή τη στιγμή. Στείλτε μας μήνυμα στο ', link: 'Instagram', after: ' και θα σας δείξουμε πώς λειτουργεί.' },
+};
 
 const NICHES = [
   { id: 'real-estate',  label: 'Μεσιτικό Γραφείο',   assistantId: '2bfbe5b8-67f5-4a91-8d58-e53377dc810f', Icon: Building2,   benefit: 'Απαντά σε ενδιαφερόμενους αγοραστές ακόμα και εκτός ωραρίου — δεν χάνετε κανένα lead.' },
@@ -75,10 +84,11 @@ function InputField({
 
 // ── main component ────────────────────────────────────────────────────────────
 export default function Demo() {
+  const { lang } = useLang();
+  const offline = OFFLINE[lang];
   const [selectedId, setSelectedId]   = useState(NICHES[0].id);
   const [status, setStatus]           = useState<CallStatus>('idle');
   const [muted, setMuted]             = useState(false);
-  const [errorMsg, setErrorMsg]       = useState('');
   const [connectStep, setConnectStep] = useState(0);
 
   // lead form state
@@ -157,7 +167,6 @@ export default function Demo() {
   async function startCall() {
     setStatus('connecting');
     hadErrorRef.current = false;
-    setErrorMsg('');
     const vapi = new Vapi(PUBLIC_KEY);
     vapiRef.current = vapi;
     vapi.on('call-start', () => setStatus('active'));
@@ -165,15 +174,14 @@ export default function Demo() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vapi.on('error', (e: any) => {
       hadErrorRef.current = true;
-      const msg = e?.message || e?.error?.message || JSON.stringify(e) || 'Unknown error';
-      setErrorMsg(msg);
+      console.error('Demo call failed:', e);
       setStatus('error');
     });
     try {
       await vapi.start(niche.assistantId);
     } catch (e: unknown) {
       hadErrorRef.current = true;
-      setErrorMsg(e instanceof Error ? e.message : String(e));
+      console.error('Demo call could not start:', e);
       setStatus('error');
     }
   }
@@ -192,7 +200,6 @@ export default function Demo() {
     hadErrorRef.current = false;
     setStatus('idle');
     setMuted(false);
-    setErrorMsg('');
     setWebhookOk(null);
   }
 
@@ -455,14 +462,12 @@ export default function Demo() {
         {/* error */}
         {status === 'error' && (
           <div className="flex flex-col items-center gap-4 text-center">
-            <p className="text-red-400 font-semibold">Αποτυχία σύνδεσης</p>
-            {errorMsg && (
-              <p className="text-slate-500 text-xs font-mono bg-slate-900 rounded-lg px-3 py-2 break-all">
-                {errorMsg}
-              </p>
-            )}
-            <p className="text-slate-400 text-sm leading-relaxed">
-              Βεβαιωθείτε ότι έχετε επιτρέψει πρόσβαση στο μικρόφωνο και δοκιμάστε ξανά.
+            <p className="text-slate-300 text-sm leading-relaxed max-w-sm">
+              {offline.before}
+              <a href={INSTAGRAM_DM} target="_blank" rel="noopener noreferrer" className="text-cyan-400 underline hover:text-cyan-300">
+                {offline.link}
+              </a>
+              {offline.after}
             </p>
             <button
               type="button"

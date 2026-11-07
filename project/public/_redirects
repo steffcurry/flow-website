@@ -1,2 +1,3 @@
+# Your own redirect rules go here. Page rewrites and the 404 page are generated at build
+# time by scripts/pages-404.mjs, so do not add a "/* /index.html 200" catch-all.
 /transak-session /transak-session 200
-/* /index.html 200
