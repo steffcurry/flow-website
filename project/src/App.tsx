@@ -1,5 +1,9 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Link } from 'react-router-dom';
+import type { ReactNode } from 'react';
+import ErrorBoundary from './components/ErrorBoundary';
+import NotFound from './pages/NotFound';
+import { useLang } from './contexts/LanguageContext';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 
@@ -27,10 +31,30 @@ const MissedCallsCost    = lazy(() => import('./pages/articles/MissedCallsCost')
 const FiveWorkflows      = lazy(() => import('./pages/articles/FiveWorkflows'));
 const AIReceptionistVsHiring = lazy(() => import('./pages/articles/AIReceptionistVsHiring'));
 
+/** If a page crashes, keep the menu and footer and show a short message instead of a white screen. */
+function PageBoundary({ children }: { children: ReactNode }) {
+  const { pathname } = useLocation();
+  const { lang } = useLang();
+  const fallback = (
+    <div className="min-h-screen flex items-center justify-center px-4 text-center">
+      <div>
+        <h1 className="text-2xl font-bold text-slate-100 mb-4">
+          {lang === 'gr' ? 'Κάτι πήγε στραβά σε αυτή τη σελίδα.' : 'Something went wrong on this page.'}
+        </h1>
+        <Link to="/" className="text-cyan-400 hover:text-cyan-300">
+          {lang === 'gr' ? 'Επιστροφή στην αρχική' : 'Back to home'}
+        </Link>
+      </div>
+    </div>
+  );
+  return <ErrorBoundary resetKey={pathname} fallback={fallback}>{children}</ErrorBoundary>;
+}
+
 function App() {
   return (
     <BrowserRouter>
       <Layout>
+        <PageBoundary>
         <Suspense fallback={
           <div className="min-h-screen bg-slate-950 flex items-center justify-center">
             <div className="flex gap-1.5">
@@ -66,8 +90,10 @@ function App() {
           <Route path="/insights/missed-calls-cost-greek-sme" element={<MissedCallsCost />} />
           <Route path="/insights/5-workflows-automate-local-business" element={<FiveWorkflows />} />
           <Route path="/insights/ai-receptionist-vs-hiring-cost" element={<AIReceptionistVsHiring />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         </Suspense>
+        </PageBoundary>
       </Layout>
     </BrowserRouter>
   );

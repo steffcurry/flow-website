@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import NotFound from "./NotFound";
 
 const templates: Record<string, string> = {
   "1LzRxKET8P2SBTXgr74cCJKI_dyz024sz": "Generate Scroll-Stopping VSLs in with Google Veo 3.0",
@@ -66,27 +67,9 @@ export default function TemplatePage() {
   }
 
   if (!templateName) {
-    return (
-      <div style={styles.page}>
-        <div style={styles.card}>
-          <div style={styles.notFound}>
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1e2d45" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="12" y1="12" x2="12" y2="16" />
-              <line x1="12" y1="18" x2="12.01" y2="18" />
-            </svg>
-            <p style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 8 }}>
-              Template not found
-            </p>
-            <p style={{ color: "#4a6080", fontSize: 14 }}>
-              This template doesn&apos;t exist.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
+    return <NotFound />;
   }
+
 
   return (
     <div style={styles.page}>

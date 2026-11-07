@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle, ArrowRight, X, TrendingUp, Clock } from 'lucide-react';
 import FadeIn from '../components/FadeIn';
+import ErrorBoundary from '../components/ErrorBoundary';
 import { useLang } from '../contexts/LanguageContext';
 import { pagesT } from '../i18n/pages';
 
@@ -30,6 +31,7 @@ export default function Pricing() {
           <p className="text-xl text-slate-400 mb-4 max-w-2xl mx-auto leading-relaxed">{t.subtitle}</p>
           <p className="text-slate-500 text-sm mb-16">{t.note}</p>
 
+          <ErrorBoundary>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {t.tiers.map((tier, i) => {
               const { tagColor, border, highlight } = TIER_COLORS[i];
@@ -74,7 +76,9 @@ export default function Pricing() {
               );
             })}
           </div>
+          </ErrorBoundary>
 
+          <ErrorBoundary>
           <FadeIn>
             <div className="max-w-4xl mx-auto mb-16 bg-slate-900/50 border border-cyan-500/20 rounded-2xl p-8 sm:p-10">
               <div className="flex items-center gap-3 mb-6">
@@ -83,7 +87,7 @@ export default function Pricing() {
               </div>
               <p className="text-slate-400 mb-8 leading-relaxed">{t.howBody}</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                {t.examples.map(({ label, before, value, cost, ratio, payback }) => (
+                {t.roiExamples.map(({ label, before, value, cost, ratio, payback }) => (
                   <div key={label} className="bg-slate-900/50 border border-slate-700/50 rounded-xl p-5">
                     <p className="text-xs font-semibold text-cyan-400 uppercase tracking-wide mb-3">{label}</p>
                     <p className="text-slate-500 text-xs mb-2 flex items-start gap-1"><X size={10} className="text-red-400 flex-shrink-0 mt-0.5"/>{before}</p>
@@ -104,7 +108,9 @@ export default function Pricing() {
               </div>
             </div>
           </FadeIn>
+          </ErrorBoundary>
 
+          <ErrorBoundary>
           <div className="max-w-2xl mx-auto bg-slate-900/40 border border-slate-700/50 rounded-2xl p-8 mb-16">
             <h3 className="text-lg font-semibold text-slate-300 mb-4">{t.neverTitle}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -116,7 +122,9 @@ export default function Pricing() {
               ))}
             </div>
           </div>
+          </ErrorBoundary>
 
+          <ErrorBoundary>
           <div className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-2xl p-8 sm:p-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">{t.auditTitle}</h2>
             <p className="text-slate-400 mb-4 max-w-xl mx-auto">{t.auditBody}</p>
@@ -126,6 +134,7 @@ export default function Pricing() {
               <ArrowRight size={18} />
             </Link>
           </div>
+          </ErrorBoundary>
         </div>
       </section>
     </div>

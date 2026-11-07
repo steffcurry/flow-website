@@ -67,7 +67,7 @@ export const pagesT = {
       ],
       howTitle: 'How we price — and why it works',
       howBody: 'Our pricing is calibrated at approximately 20% of the annual value the system generates for your business. The remaining 80% stays with you.',
-      examples: [
+      roiExamples: [
         { label: 'Dental clinic example', before: '4 missed bookings/week → 16/month lost', value: '€175 avg ticket × 16 = €2,800/mo recovered', cost: 'Your monthly investment: €297', ratio: '11% of monthly value', payback: 'Setup recovered in < 3 months' },
         { label: 'Plumbing company example', before: '2 missed emergency calls/week', value: '2 × €600 call-out × 4 = €4,800/mo recovered', cost: 'Your monthly investment: €297', ratio: '6% of monthly value', payback: 'Setup recovered in < 1 month' },
         { label: 'Law firm example', before: '4 missed consultations/month', value: '4 × €500 avg case = €2,000/mo recovered', cost: 'Your monthly investment: €297', ratio: '15% of monthly value', payback: 'Setup recovered in 3 months' },
@@ -316,7 +316,7 @@ export const pagesT = {
       ],
       howTitle: 'Πώς τιμολογούμε — και γιατί λειτουργεί',
       howBody: 'Η τιμολόγησή μας βαθμονομείται στο ~20% της ετήσιας αξίας που δημιουργεί το σύστημα για την επιχείρησή σας. Το υπόλοιπο 80% παραμένει σε εσάς.',
-      examples: [
+      roiExamples: [
         { label: 'Παράδειγμα οδοντιατρείου', before: '4 χαμένες κρατήσεις/εβδομάδα → 16/μήνα χαμένα', value: '€175 μέσο ticket × 16 = €2.800/μήνα ανακτηθέντα', cost: 'Μηνιαία επένδυση: €297', ratio: '11% της μηνιαίας αξίας', payback: 'Ανάκτηση ρύθμισης σε < 3 μήνες' },
         { label: 'Παράδειγμα υδραυλικής εταιρείας', before: '2 χαμένες επείγουσες κλήσεις/εβδομάδα', value: '2 × €600 × 4 = €4.800/μήνα ανακτηθέντα', cost: 'Μηνιαία επένδυση: €297', ratio: '6% της μηνιαίας αξίας', payback: 'Ανάκτηση ρύθμισης σε < 1 μήνα' },
         { label: 'Παράδειγμα δικηγορικού γραφείου', before: '4 χαμένες συμβουλευτικές/μήνα', value: '4 × €500 = €2.000/μήνα ανακτηθέντα', cost: 'Μηνιαία επένδυση: €297', ratio: '15% της μηνιαίας αξίας', payback: 'Ανάκτηση ρύθμισης σε 3 μήνες' },

@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
+import NotFound from './NotFound';
 import { CheckCircle, ArrowRight, Phone, X } from 'lucide-react';
 import { useLang } from '../contexts/LanguageContext';
 import { pagesT } from '../i18n/pages';
@@ -11,15 +12,9 @@ export default function Industry() {
   const data = niche ? industryData[niche] : null;
 
   if (!data) {
-    return (
-      <div className="min-h-screen flex items-center justify-center px-4 text-center">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-100 mb-4">{t.notFound}</h1>
-          <Link to="/" className="text-cyan-400 hover:text-cyan-300">{t.notFoundLink}</Link>
-        </div>
-      </div>
-    );
+    return <NotFound />;
   }
+
 
   return (
     <div className="relative">

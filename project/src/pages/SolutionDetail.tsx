@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
+import NotFound from './NotFound';
 import { CheckCircle, ArrowRight, Phone, X } from 'lucide-react';
 import FadeIn from '../components/FadeIn';
 
@@ -186,15 +187,9 @@ export default function SolutionDetail() {
   const data = type ? SOLUTIONS[type] : null;
 
   if (!data) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-center px-4">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-100 mb-4">Solution not found</h1>
-          <Link to="/solutions" className="text-cyan-400 hover:text-cyan-300">← Back to Solutions</Link>
-        </div>
-      </div>
-    );
+    return <NotFound />;
   }
+
 
   return (
     <div className="relative">
