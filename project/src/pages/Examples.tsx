@@ -1,7 +1,30 @@
 import { Link } from 'react-router-dom';
-import { ExternalLink, ArrowRight, Play } from 'lucide-react';
+import { ExternalLink, ArrowRight, Play, CheckCircle } from 'lucide-react';
 import { useLang } from '../contexts/LanguageContext';
 import { pagesT } from '../i18n/pages';
+
+// Real, live work (not demos). Use only facts the client has approved.
+const LIVE_PROJECTS = [
+  {
+    name: 'made_nd_meant',
+    url: 'https://made-nd-meant.pages.dev',
+    urlLabel: 'made-nd-meant.pages.dev',
+    desktop: { src: '/work/made-nd-meant-desktop.webp', width: 1200, height: 600 },
+    phone: { src: '/work/made-nd-meant-phone.webp', width: 440, height: 953 },
+    en: {
+      kind: 'Handmade custom gifts shop · India',
+      built: ['A fast static shop', 'A basket', 'Ordering on WhatsApp and Instagram', 'UPI QR payment', 'English/Hindi language switch'],
+      altDesktop: 'made_nd_meant home page on a desktop screen',
+      altPhone: 'made_nd_meant home page on a phone',
+    },
+    gr: {
+      kind: 'Κατάστημα με χειροποίητα εξατομικευμένα δώρα · Ινδία',
+      built: ['Γρήγορο στατικό κατάστημα', 'Καλάθι αγορών', 'Παραγγελίες μέσω WhatsApp και Instagram', 'Πληρωμή με UPI QR', 'Εναλλαγή γλώσσας: Αγγλικά και Χίντι'],
+      altDesktop: 'Η αρχική σελίδα του made_nd_meant σε οθόνη υπολογιστή',
+      altPhone: 'Η αρχική σελίδα του made_nd_meant σε κινητό',
+    },
+  },
+];
 
 const FEATURED_DEMOS = [
   {
@@ -43,6 +66,50 @@ export default function Examples() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-slate-100 drop-shadow-[0_0_30px_rgba(6,182,212,0.3)]">{t.title}</h1>
             <p className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">{t.subtitle}</p>
             <p className="text-slate-300 max-w-3xl mx-auto mt-4 leading-relaxed">{t.desc}</p>
+          </div>
+
+          <h2 className="text-3xl font-bold mb-8 text-slate-100 text-center">{t.liveTitle}</h2>
+
+          <div className="space-y-12 mb-16">
+            {LIVE_PROJECTS.map((project) => {
+              const p = project[lang];
+              return (
+                <div key={project.name} className="bg-slate-900/40 border border-emerald-500/25 rounded-2xl p-6 sm:p-10 hover:border-emerald-400/40 transition-colors duration-200">
+                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
+                    <div className="lg:col-span-2">
+                      <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/15 border border-emerald-500/30 rounded-full text-xs font-semibold text-emerald-400 uppercase tracking-wider mb-5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
+                        {t.liveBadge}
+                      </div>
+                      <h3 className="text-2xl sm:text-3xl font-bold mb-2 text-slate-100">{project.name}</h3>
+                      <p className="text-slate-400 mb-6">{p.kind}</p>
+                      <h4 className="text-lg font-semibold text-slate-200 mb-3">{t.liveBuilt}</h4>
+                      <ul className="space-y-2 mb-8">
+                        {p.built.map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-slate-300">
+                            <CheckCircle size={18} className="text-emerald-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                      <a href={project.url} target="_blank" rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg transition-opacity hover:opacity-90">
+                        {t.liveVisit}<ExternalLink size={16} aria-hidden="true" />
+                      </a>
+                      <p className="text-xs text-slate-500 mt-3">{project.urlLabel}</p>
+                    </div>
+                    <div className="lg:col-span-3 relative pb-10 sm:pb-12 pr-[14%]">
+                      <img src={project.desktop.src} width={project.desktop.width} height={project.desktop.height}
+                        alt={p.altDesktop} loading="lazy" decoding="async"
+                        className="w-full h-auto rounded-xl border border-slate-700/60 shadow-2xl shadow-black/40" />
+                      <img src={project.phone.src} width={project.phone.width} height={project.phone.height}
+                        alt={p.altPhone} loading="lazy" decoding="async"
+                        className="absolute right-0 bottom-0 w-[25%] h-auto rounded-2xl border-4 border-slate-950 shadow-2xl shadow-black/50" />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           <div className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-xl p-6 mb-16">
