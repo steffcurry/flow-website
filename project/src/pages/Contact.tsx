@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Calendar, Mail } from 'lucide-react';
+import { MessageCircle, Mail } from 'lucide-react';
 import { useLang } from '../contexts/LanguageContext';
 import { pagesT } from '../i18n/pages';
 
@@ -9,8 +9,8 @@ export default function Contact() {
 
   useEffect(() => {
     document.title = lang === 'gr'
-      ? 'Κλείστε Δωρεάν Έλεγχο | Coreflow Automation'
-      : 'Book a Free Automation Audit | Coreflow Automation';
+      ? 'Ζητήστε Δωρεάν Έλεγχο | Coreflow Automation'
+      : 'Request a Free Automation Audit | Coreflow Automation';
     return () => { document.title = 'Coreflow Automation | AI Automation Agency'; };
   }, [lang]);
 
@@ -35,12 +35,12 @@ export default function Contact() {
                 {t.cta}<span className="font-semibold text-cyan-400">{t.ctaBold}</span>.
               </p>
               <a
-                href="https://calendar.app.google/wmsFSP26C5nddYTE7"
+                href="https://ig.me/m/coreflow.automation"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-lg font-semibold rounded-lg transition-opacity hover:opacity-90 shadow-lg shadow-cyan-500/20"
               >
-                <Calendar className="mr-2" size={20} />
+                <MessageCircle className="mr-2" size={20} />
                 {t.btn}
               </a>
               <p className="text-slate-300 leading-relaxed">
